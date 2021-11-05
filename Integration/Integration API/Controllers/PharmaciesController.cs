@@ -24,13 +24,13 @@ namespace Integration_API.Controllers
 
           // GET: api/pharmacies/id
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pharmacy>> GetTodoItem(String id)
+        public async Task<ActionResult<Pharmacy>> GetPharmacyById(String id)
         {
             return Ok(await _pharmacies.GetPharmacyById(id));
         }
 
         // GET: Pharmacies/
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> GetPharmacies()
         {
             return Ok(await _pharmacies.GetAllPharmacies());
         }
