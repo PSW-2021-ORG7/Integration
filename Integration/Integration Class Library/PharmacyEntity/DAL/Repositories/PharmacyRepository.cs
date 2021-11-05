@@ -1,5 +1,6 @@
 ﻿using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,14 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
         {
             _context = context;
         }
+
+        public async Task<Pharmacy> CreatePharmacy(Pharmacy pharmacy)
+        {
+            _context.Add(pharmacy);
+            await _context.SaveChangesAsync();
+            return pharmacy;
+        }
+
         public async Task<List<Pharmacy>> GetAllPharmacies()
         {
             return await _context.Pharmacies.ToListAsync();
@@ -46,6 +55,21 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
             }
 
             return 0;
+        }
+
+        public async Task<ActionResult<Pharmacy>> DeletePharmacy(String id)
+        {
+            var pharmacy = await _context.Pharmacies.FindAsync(id);
+            if (pharmacy == null)
+            {
+                //return NotFound(); ?
+                return null;
+            }
+
+            _context.Pharmacies.Remove(pharmacy);
+            await _context.SaveChangesAsync();
+
+            return pharmacy;
         }
 
         private bool PharmacyExists(String id)
