@@ -15,7 +15,7 @@ namespace Integration_Class_Library.PharmacyEntity.DAL
         public DbSet<Pharmacy> Pharmacies { get; set; }
 
         // only for testing purposes
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+       /* protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Pharmacy>().HasData(
                 new Pharmacy { IdPharmacy = "P1", NamePharmacy = "Pharmacy 1", ApiKeyPharmacy = "ABCD1234", Endpoint = "www.pharmacy1.rs" },
@@ -23,5 +23,6 @@ namespace Integration_Class_Library.PharmacyEntity.DAL
 
             );
         }
+       */
     }
 }
