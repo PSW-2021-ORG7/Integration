@@ -29,10 +29,17 @@ namespace Integration_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            
             services.AddDbContext<PharmacyDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
             );
+
+            services.AddDbContext<FeedbackDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
+            );
+            
             services.AddScoped<IPharmacyRepository, PharmacyRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddCors();
         }
 
