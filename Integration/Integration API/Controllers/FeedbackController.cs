@@ -1,10 +1,7 @@
-﻿using Integration_Class_Library.PharmacyEntity.DAL.Repositories;
-using Integration_Class_Library.PharmacyEntity.Interfaces;
+﻿using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Integration_Class_Library.PharmacyEntity.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Integration_API.Controllers
