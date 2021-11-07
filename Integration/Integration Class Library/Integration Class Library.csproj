@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="PharmacyEntity\Services\" />
+    <Folder Include="SharedModel\" />
   </ItemGroup>
 
   <ItemGroup>
