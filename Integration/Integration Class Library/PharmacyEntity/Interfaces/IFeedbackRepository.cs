@@ -13,5 +13,6 @@ namespace Integration_Class_Library.PharmacyEntity.Interfaces
         Task<Feedback> GetFeedbackById(String id);
         Task<int> PutFeedback(String id, Feedback feedback);
         Task<ActionResult<Feedback>> DeleteFeedback(String id);
+        Task<List<Feedback>> GetFeedbackByPharmacyId(String idPharmacy);
     }
 }

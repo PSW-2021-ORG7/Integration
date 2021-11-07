@@ -16,6 +16,13 @@ namespace Integration_API.Controllers
             _feedback = feedback;
         }
 
+        // GET: api/feedback
+        [HttpGet]
+        public async Task<ActionResult<Feedback>> GetAllFeedback()
+        {
+            return Ok(await _feedback.GetAllFeedback());
+        }
+
         // GET: api/feedback/id
         [HttpGet("{id}")]
         public async Task<ActionResult<Feedback>> GetFeedbackById(String id)
@@ -23,12 +30,14 @@ namespace Integration_API.Controllers
             return Ok(await _feedback.GetFeedbackById(id));
         }
 
-        // GET: feedback/
-        public async Task<IActionResult> GetAllFeedback()
+        //GET:
+        [HttpGet("find/{idPharmacy}")]
+        public async Task<ActionResult<Feedback>> GetFeedbackByPharmacyId(String idPharmacy)
         {
-            return Ok(await _feedback.GetAllFeedback());
+            return Ok(await _feedback.GetFeedbackByPharmacyId(idPharmacy));
         }
 
+        //public async Task<List<Feedback>> GetFeedbackByPharmacyId(string idPharmacy)
         // POST: api/feedback
         [HttpPost]
         public async Task<ActionResult<Feedback>> PostFeedback([FromBody] Feedback feedback)

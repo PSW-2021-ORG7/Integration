@@ -49,6 +49,11 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
             return await _context.Feedback.FindAsync(id);
         }
 
+        public async Task<List<Feedback>> GetFeedbackByPharmacyId(string idPharmacy)
+        { 
+            return await _context.Feedback.Where(x => x.IdPharmacy.Equals(idPharmacy)).ToListAsync();
+        }
+
         public async Task<int> PutFeedback(string id, Feedback feedback)
         {
             _context.Entry(feedback).State = EntityState.Modified;
@@ -74,5 +79,6 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
         {
             return _context.Feedback.Any(e => e.IdPharmacy == id);
         }
+
     }
 }
