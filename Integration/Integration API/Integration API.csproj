@@ -25,4 +25,11 @@
     <ProjectReference Include="..\Integration Class Library\Integration Class Library.csproj" />
   </ItemGroup>
 
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+      <ItemGroup>
+          <_CustomFiles Include="..\..\commit-msg" />
+      </ItemGroup>
+      <Copy SourceFiles="@(_CustomFiles)" DestinationFolder="./../../.git/hooks" />
+  </Target>
+
 </Project>
