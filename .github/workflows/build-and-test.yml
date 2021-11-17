@@ -22,8 +22,8 @@ jobs:
       run: dotnet restore ./Integration
       
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore ./Integration
 
     - name: Test
-      run: dotnet test --no-restore --verbosity normal 
+      run: dotnet test --no-restore --verbosity normal ./Integration
 
