@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
+using Integration_API.Filters;
 
 namespace Integration_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiKeyAuth]
     public class PharmaciesController : Controller
     {
 

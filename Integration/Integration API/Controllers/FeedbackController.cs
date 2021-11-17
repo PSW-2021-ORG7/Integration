@@ -1,4 +1,5 @@
-﻿using Integration_Class_Library.PharmacyEntity.Interfaces;
+﻿using Integration_API.Filters;
+using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Integration_Class_Library.PharmacyEntity.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,6 +9,7 @@ namespace Integration_API.Controllers
 {
     [Route("api/feedback")]
     [ApiController]
+    [ApiKeyAuth]
     public class FeedbackController : Controller
     {
         private readonly IFeedbackRepository _feedback;
