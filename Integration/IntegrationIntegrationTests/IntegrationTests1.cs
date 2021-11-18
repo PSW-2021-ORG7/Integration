@@ -1,9 +1,9 @@
 using System;
 using Xunit;
 
-namespace IntegrationTests.Unit
+namespace IntegrationIntegrationTests
 {
-    public class UnitTest1
+    public class IntegrationTests1
     {
         [Fact]
         public void Test1()
