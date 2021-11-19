@@ -39,7 +39,10 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
 
             try
             {
+                var entry = _context.Pharmacies.First(e => e.IdPharmacy == pharmacy.IdPharmacy);
+                _context.Entry(entry).CurrentValues.SetValues(pharmacy);
                 _context.SaveChanges();
+
             }
             catch (DbUpdateConcurrencyException)
             {

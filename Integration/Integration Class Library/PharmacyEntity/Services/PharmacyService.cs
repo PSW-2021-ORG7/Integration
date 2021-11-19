@@ -12,9 +12,6 @@ namespace Integration_Class_Library.PharmacyEntity.Services
 
         public PharmacyService(IPharmacyRepository pharmacyRepository) => this.pharmacyRepository = pharmacyRepository;
 
-        public PharmacyService()
-        {
-        }
 
         public Pharmacy GetPharmacyById(String id)
         {
