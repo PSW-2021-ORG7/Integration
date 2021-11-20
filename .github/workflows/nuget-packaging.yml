@@ -6,7 +6,7 @@ on:
       - "v*.*.*"
 
 env:
-  PROJECT_PATH: 'Integration/Integration_Class_Library/Integration_Class_Library.csproj'
+  PROJECT_PATH: 'Integration_Class_Library/Integration_Class_Library.csproj'
   PACKAGE_OUTPUT_DIRECTORY: ${{github.workspace}}\output
   NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
 
