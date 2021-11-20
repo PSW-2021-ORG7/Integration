@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>IntegrationClassLibrary</PackageId>
+    <Authors>IntegrationClassLibrary</Authors>
+    <Product>IntegrationClassLibrary</Product>
   </PropertyGroup>
 
   <ItemGroup>

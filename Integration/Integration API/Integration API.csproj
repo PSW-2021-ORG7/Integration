@@ -3,9 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Integration_API</RootNamespace>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="IntegrationClassLibrary" Version="1.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.20">
       <PrivateAssets>all</PrivateAssets>
@@ -17,6 +19,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.18" />
   </ItemGroup>
@@ -24,12 +27,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Integration Class Library\Integration Class Library.csproj" />
   </ItemGroup>
-
-  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
-      <ItemGroup>
-          <_CustomFiles Include="..\..\commit-msg" />
-      </ItemGroup>
-      <Copy SourceFiles="@(_CustomFiles)" DestinationFolder="./../../.git/hooks" />
-  </Target>
-
 </Project>
