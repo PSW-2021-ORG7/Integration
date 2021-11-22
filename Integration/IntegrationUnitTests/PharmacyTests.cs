@@ -17,13 +17,6 @@ namespace IntegrationTests.Unit
         }
 
         [Fact]
-        public void Delete_pharmacy()
-        {
-            bool deleted = pharmacyRepository.DeletePharmacy("P2");
-            Assert.True(deleted);
-        }
-
-        [Fact]
         public void Get_all_pharmacies()
         {
 
@@ -39,7 +32,13 @@ namespace IntegrationTests.Unit
             Assert.NotNull(pharmacy);
         }
 
-     
+        [Fact]
+        public void Delete_pharmacy()
+        {
+            bool deleted = pharmacyRepository.DeletePharmacy("P2");
+            Assert.True(deleted);
+        }
+
         [Fact]
         public void Put_pharmacy()
         {

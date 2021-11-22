@@ -23,9 +23,7 @@ namespace IntegrationTests.Model
             context.SaveChanges();
         }
         public void Dispose()
-        {
-
-            context.Database.EnsureDeleted();
+        {         
             context.Dispose();
         }
     }
