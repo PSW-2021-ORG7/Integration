@@ -1,8 +1,6 @@
 using Integration_Class_Library.Models;
-using Integration_Class_Library.PharmacyEntity.DAL;
 using Integration_Class_Library.PharmacyEntity.DAL.Repositories;
 using IntegrationTests.Model;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using Xunit;
 
@@ -18,6 +16,12 @@ namespace IntegrationTests.Unit
             this.pharmacyRepository = new PharmacyRepository(fixture.context); 
         }
 
+        [Fact]
+        public void Delete_pharmacy()
+        {
+            bool deleted = pharmacyRepository.DeletePharmacy("P2");
+            Assert.True(deleted);
+        }
 
         [Fact]
         public void Get_all_pharmacies()
@@ -35,13 +39,7 @@ namespace IntegrationTests.Unit
             Assert.NotNull(pharmacy);
         }
 
-        [Fact]
-        public void Delete_pharmacy()
-        {
-            bool deleted = pharmacyRepository.DeletePharmacy("P2");
-            Assert.True(deleted);
-        }
-
+     
         [Fact]
         public void Put_pharmacy()
         {
