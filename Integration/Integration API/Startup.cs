@@ -1,6 +1,7 @@
 using Integration_Class_Library.PharmacyEntity.DAL;
 using Integration_Class_Library.PharmacyEntity.DAL.Repositories;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
+using Integration_Class_Library.Tendering.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace Integration_API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+            services.AddHostedService<RabbitMQService>();
             services.AddDbContext<PharmacyDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
             );
