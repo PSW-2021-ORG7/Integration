@@ -1,14 +1,15 @@
-using System;
 using Xunit;
 
-namespace IntegrationUnitTests
+namespace IntegrationTests.Unit
 {
-    public class UnitTest1
+    public class PharmacyTests 
     {
+       
         [Fact]
         public void Test1()
         {
             Assert.True(1 == 1);
         }
+
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
 {
@@ -18,62 +18,83 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
             _context = context;
         }
 
-        public async Task<Pharmacy> CreatePharmacy(Pharmacy pharmacy)
+        public Pharmacy CreatePharmacy(Pharmacy pharmacy)
         {
             _context.Add(pharmacy);
-            await _context.SaveChangesAsync();
+            _context.SaveChangesAsync();
             return pharmacy;
         }
 
-        public async Task<List<Pharmacy>> GetAllPharmacies()
+        public List<Pharmacy> GetAllPharmacies()
         {
-            return await _context.Pharmacies.ToListAsync();
+            return _context.Pharmacies.ToList();
         }
 
-        public async Task<Pharmacy> GetPharmacyById(string id)
+        public Pharmacy GetPharmacyById(string id)
         {
-            return await _context.Pharmacies.FindAsync(id);
+            return _context.Pharmacies.Find(id);
         }
 
-        public async Task<int> PutPharmacy(string id, Pharmacy pharmacy)
+        public bool PutPharmacy(string id, Pharmacy pharmacy)
         {
             _context.Entry(pharmacy).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                var entry = _context.Pharmacies.First(e => e.IdPharmacy == pharmacy.IdPharmacy);
+                _context.Entry(entry).CurrentValues.SetValues(pharmacy);
+                _context.SaveChanges();
+
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!PharmacyExists(id))
                 {
-                    return -1;
+                    return false;
                 }
 
                 throw;
             }
 
-            return 0;
+            return true;
         }
 
-        public async Task<ActionResult<Pharmacy>> DeletePharmacy(String id)
+        public bool DeletePharmacy(String id)
         {
-            var pharmacy = await _context.Pharmacies.FindAsync(id);
+            var pharmacy = _context.Pharmacies.Find(id);
             if (pharmacy == null)
             {
-                //return NotFound(); ?
-                return null;
+                return false;
             }
 
             _context.Pharmacies.Remove(pharmacy);
-            await _context.SaveChangesAsync();
-
-            return pharmacy;
+            _context.SaveChanges();
+            return true;
         }
 
         private bool PharmacyExists(String id)
         {
             return _context.Pharmacies.Any(e => e.IdPharmacy == id);
+        }
+
+        public bool DownloadMedicationSpecification(String fileName)
+        {
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.14", "tester", "password")))
+            {
+                client.Connect();
+
+                string sourceFileServer = @"\public\" + fileName;
+                string sourceFileLocal = @"C:\Users\Iodum99\Desktop\PSW Projekat\Integration\Integration\Integration API\Downloads\" + fileName;
+
+            
+                using (Stream stream = File.OpenWrite(sourceFileLocal))
+                {
+                    client.DownloadFile(sourceFileServer, stream);
+                }
+
+                client.Disconnect();
+            }
+            return true;
         }
     }
 }
