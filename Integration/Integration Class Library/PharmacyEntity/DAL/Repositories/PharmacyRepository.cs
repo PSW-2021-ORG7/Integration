@@ -1,8 +1,10 @@
 ﻿using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
@@ -73,6 +75,26 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
         private bool PharmacyExists(String id)
         {
             return _context.Pharmacies.Any(e => e.IdPharmacy == id);
+        }
+
+        public bool DownloadMedicationSpecification(String fileName)
+        {
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.14", "tester", "password")))
+            {
+                client.Connect();
+
+                string sourceFileServer = @"\public\" + fileName;
+                string sourceFileLocal = @"C:\Users\Iodum99\Desktop\PSW Projekat\Integration\Integration\Integration API\Downloads\" + fileName;
+
+            
+                using (Stream stream = File.OpenWrite(sourceFileLocal))
+                {
+                    client.DownloadFile(sourceFileServer, stream);
+                }
+
+                client.Disconnect();
+            }
+            return true;
         }
     }
 }

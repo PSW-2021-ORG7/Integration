@@ -56,5 +56,12 @@ namespace Integration_API.Controllers
             return Ok(pharmacyService.DeletePharmacy(id));
         }
 
+        // GET: api/pharmacy/downloadSpec/fileName
+        [HttpGet("downloadSpec/{fileName}")]
+        public IActionResult DownloadMedicationSpecification(String fileName)
+        {
+            return Ok(pharmacyService.DownloadMedicationSpecification(fileName));
+        }
+
     }
 }

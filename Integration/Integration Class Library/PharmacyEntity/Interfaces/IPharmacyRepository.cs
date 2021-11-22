@@ -11,5 +11,6 @@ namespace Integration_Class_Library.PharmacyEntity.Interfaces
         Pharmacy GetPharmacyById(String id);
         bool PutPharmacy(String id, Pharmacy pharmacy);
         bool DeletePharmacy(String id);
+        bool DownloadMedicationSpecification(String fileName);
     }
 }
