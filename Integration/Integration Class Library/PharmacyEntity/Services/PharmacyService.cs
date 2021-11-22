@@ -38,5 +38,18 @@ namespace Integration_Class_Library.PharmacyEntity.Services
         {
             return pharmacyRepository.DeletePharmacy(id);
         }
+
+        public bool DownloadMedicationSpecification(String fileName)
+        {
+            try
+            {
+                return pharmacyRepository.DownloadMedicationSpecification(fileName);
+            }
+            catch (Exception e)
+            {
+                throw (e);
+            }
+            
+        }
     }
 }
