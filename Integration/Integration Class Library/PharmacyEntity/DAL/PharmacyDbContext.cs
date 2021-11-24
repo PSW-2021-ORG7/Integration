@@ -14,7 +14,7 @@ namespace Integration_Class_Library.PharmacyEntity.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Pharmacy>().HasData(
-                new Pharmacy { IdPharmacy = "P1", NamePharmacy = "Irisfarm", ApiKeyPharmacy = "XYZX", Endpoint = "http://localhost:64677/", Adresa = "Kralja Petra I", Naselje = "Veternik"}              
+                new Pharmacy { IdPharmacy = "P1", NamePharmacy = "Irisfarm", ApiKeyPharmacy = "XYZX", Endpoint = "http://localhost:64677/", Address = "Kralja Petra I", City = "Veternik"}              
             );
         }
      
