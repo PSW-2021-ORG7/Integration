@@ -78,33 +78,32 @@ namespace Integration_API.Controllers
 
         // INVENTORY
 
-        [HttpPost]
-        [Route("/inventory/check")]
+        [HttpPut("/inventory/order/{quantity}")]
+
         public IActionResult ProcessOrder([FromBody] Medicine medicine, int quantity)
         {
+
             if (_medicineService.MedicineExists(medicine))
             {
                 Medicine foundMedicine = _medicineService.GetByNameAndDose(medicine.Name, medicine.DosageInMilligrams);
                 return Ok(_medicineInventoryService.Update(new MedicineInventory(foundMedicine.Id, quantity)));
             }
             else
-            {
                 if (_medicineService.Save(medicine))
-                    return Ok(_medicineInventoryService.Update(new MedicineInventory(medicine.Id, quantity)));
+                return Ok(_medicineInventoryService.Save(new MedicineInventory(medicine.Id, quantity)));
+                  
+                
+            return BadRequest(false);           
 
-                return Ok(false);
-            }           
         }
 
-        [HttpGet]
-        [Route("/inventory")]
+        [HttpGet("/inventory")]
         public IActionResult GetInventory()
         {
             return Ok(_medicineInventoryService.GetAll());
         }
 
-        [HttpPut]
-        [Route("/inventory/{id}")]
+        [HttpPut("/inventory/{id}")]
         public IActionResult UpdateInventory([FromBody] MedicineInventory medicineInventory)
         {
             return Ok(_medicineInventoryService.Update(medicineInventory));

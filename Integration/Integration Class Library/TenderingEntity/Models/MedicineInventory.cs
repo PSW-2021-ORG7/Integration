@@ -5,6 +5,7 @@ namespace Integration_Class_Library.TenderingEntity.Models
 { 
     public class MedicineInventory
     {
+        public MedicineInventory() { }
         public MedicineInventory(int medicineId)
         {
             MedicineId = medicineId;
