@@ -14,7 +14,7 @@ namespace Integration_API.DTO
         public List<string> PossibleReactions { get; set; }
         public string WayOfConsumption { get; set; }
         public string PotentialDangers { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
+        //public List<Ingredient> Ingredients { get; set; }
         public List<int> MedicinesToCombineWith { get; set; }
     }
 }

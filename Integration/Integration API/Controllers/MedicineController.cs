@@ -1,14 +1,16 @@
-﻿using AutoMapper;
-using AutoMapper.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using backend.Repositories.Interfaces;
 using Integration_API.DTO;
 using Integration_Class_Library.TenderingEntity.Interfaces;
 using Integration_Class_Library.TenderingEntity.Models;
 using Integration_Class_Library.TenderingEntity.Services;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 
 namespace Integration_API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class MedicineController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -80,7 +82,18 @@ namespace Integration_API.Controllers
         [Route("/inventory/check")]
         public IActionResult ProcessOrder([FromBody] Medicine medicine, int quantity)
         {
-            return Ok(_medicineService.ProcessOrder(medicine, quantity));
+            if (_medicineService.MedicineExists(medicine))
+            {
+                Medicine foundMedicine = _medicineService.GetByNameAndDose(medicine.Name, medicine.DosageInMilligrams);
+                return Ok(_medicineInventoryService.Update(new MedicineInventory(foundMedicine.Id, quantity)));
+            }
+            else
+            {
+                if (_medicineService.Save(medicine))
+                    return Ok(_medicineInventoryService.Update(new MedicineInventory(medicine.Id, quantity)));
+
+                return Ok(false);
+            }           
         }
 
         [HttpGet]

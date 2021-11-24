@@ -20,8 +20,7 @@ namespace Integration_Class_Library.TenderingEntity.Services
 
         public bool Save(Medicine medicine)
         {
-            if (medicineRepository.Save(medicine)) return true;
-            return false;
+            return (medicineRepository.Save(medicine));
         }
 
         public Medicine GetByID(int id)
@@ -49,16 +48,15 @@ namespace Integration_Class_Library.TenderingEntity.Services
             if (medicineRepository.MedicineExists(medicine))
             {
                 MedicineInventory inventory = new MedicineInventory(medicine.Id, quantity);
-                if (medicineInventoryRepository.Update(inventory)) return true;
-                return false;
-            }
-            else
-            {
-                //else -> Add Medicine
-                //     -> Update Inventory
-                return true;
+                return (medicineInventoryRepository.Update(inventory));
             }
 
+            return false;
+        }
+
+        public bool MedicineExists(Medicine medicine)
+        {
+            return medicineRepository.MedicineExists(medicine);
         }
     }
 }

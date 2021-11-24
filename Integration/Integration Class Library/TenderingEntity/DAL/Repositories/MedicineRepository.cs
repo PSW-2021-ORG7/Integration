@@ -24,15 +24,23 @@ namespace Integration_Class_Library.TenderingEntity.DAL.Repositories
             _dataContext.SaveChanges();
         }
 
-        public List<Medicine> GetAll() { 
-            return _dataContext.Medicine.Include(m => m.Ingredients).ToList();
+        /* public List<Medicine> GetAll() { 
+             return _dataContext.Medicine.Include(m => m.Ingredients).ToList();
+         }
+
+         */
+        public List<Medicine> GetAll()
+        {
+            //return _dataContext.Medicine.Include(m => m.Ingredients).ToList();
+            return _dataContext.Medicine.ToList();
         }
 
 
-       public Medicine GetByName(string name)
+        public Medicine GetByName(string name)
         {
-            return _dataContext.Medicine.Include(m => m.Ingredients).SingleOrDefault(m => m.Name == name);
-		}
+            //return _dataContext.Medicine.Include(m => m.Ingredients).SingleOrDefault(m => m.Name == name);
+            return _dataContext.Medicine.SingleOrDefault(m => m.Name == name);
+        }
 		
  
         public Medicine GetByNameAndDose(string name, int dose)
@@ -66,7 +74,8 @@ namespace Integration_Class_Library.TenderingEntity.DAL.Repositories
 
         public Medicine GetByID(int id)
         {
-            return _dataContext.Medicine.Include(m => m.Ingredients).SingleOrDefault(m => m.Id.Equals(id));
+           // return _dataContext.Medicine.Include(m => m.Ingredients).SingleOrDefault(m => m.Id.Equals(id));
+            return _dataContext.Medicine.SingleOrDefault(m => m.Id.Equals(id));
         }
 
     }

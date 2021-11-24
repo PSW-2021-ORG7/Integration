@@ -10,7 +10,7 @@ namespace Integration_Class_Library.TenderingEntity.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
 
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -34,7 +34,7 @@ namespace Integration_Class_Library.TenderingEntity.Models
 
         public string PotentialDangers { get; set; }
 
-        public List<Ingredient> Ingredients { get; set; }
+        //public List<Ingredient> Ingredients { get; set; }
 
         public Medicine() { }
 

@@ -1,6 +1,10 @@
+using backend.Repositories.Interfaces;
 using Integration_Class_Library.PharmacyEntity.DAL;
 using Integration_Class_Library.PharmacyEntity.DAL.Repositories;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
+using Integration_Class_Library.TenderingEntity.DAL;
+using Integration_Class_Library.TenderingEntity.DAL.Repositories;
+using Integration_Class_Library.TenderingEntity.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +27,11 @@ namespace Integration_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
-            
+            services.AddAutoMapper(typeof(Startup));
+            services.AddSingleton<IConfiguration>(Configuration);
+
             services.AddDbContext<PharmacyDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
             );
@@ -32,10 +39,26 @@ namespace Integration_API
             services.AddDbContext<FeedbackDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
             );
-            
+
+            services.AddDbContext<MedicineDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
+            );
+
             services.AddScoped<IPharmacyRepository, PharmacyRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
-            services.AddCors();
+            services.AddScoped<IMedicineRepository, MedicineRepository>();
+            services.AddScoped<IMedicineInventoryRepository, MedicineInventoryRepository>();
+            services.AddScoped<IIngredientRepository, IngredientRepository>();
+            services.AddScoped<IMedicineCombinationRepository, MedicineCombinationRepository>();
+
+            
+
+            //Enable CORS
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

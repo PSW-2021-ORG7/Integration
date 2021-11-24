@@ -16,9 +16,10 @@ namespace Integration_Class_Library.TenderingEntity.DAL
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
-            builder.Entity<Ingredient>()
+         /*   builder.Entity<Ingredient>()
                 .HasIndex(i => i.Name)
                 .IsUnique();
+         */
         }
     }
 }
