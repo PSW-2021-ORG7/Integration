@@ -48,7 +48,7 @@ namespace Integration_Class_Library.TenderingEntity.Services
             //CheckIfAvailable -> Update inventory
             //else -> Add Medicine
             //     -> Update Inventory
-            return medicineRepository.ProcessOrder(medicine);
+            return medicineRepository.ProcessOrder(medicine, quantity);
         }
     }
 }
