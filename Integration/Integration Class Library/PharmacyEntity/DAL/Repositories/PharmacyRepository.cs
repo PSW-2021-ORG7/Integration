@@ -84,9 +84,9 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
                 client.Connect();
 
                 string sourceFileServer = @"\public\" + fileName;
-                string sourceFileLocal = @"C:\Users\Iodum99\Desktop\PSW Projekat\Integration\Integration\Integration API\Downloads\" + fileName;
+                string sourceFileLocal = Path.Combine(Environment.CurrentDirectory, @"Downloads\", fileName);
 
-            
+
                 using (Stream stream = File.OpenWrite(sourceFileLocal))
                 {
                     client.DownloadFile(sourceFileServer, stream);
