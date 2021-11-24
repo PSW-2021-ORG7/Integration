@@ -69,13 +69,5 @@ namespace Integration_Class_Library.TenderingEntity.DAL.Repositories
             return _dataContext.Medicine.Include(m => m.Ingredients).SingleOrDefault(m => m.Id.Equals(id));
         }
 
-        public bool ProcessOrder(Medicine medicine, int quantity)
-        {
-          
-            return true;
-        }
-
-
-
     }
 }

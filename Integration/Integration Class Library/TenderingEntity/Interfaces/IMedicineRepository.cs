@@ -10,7 +10,6 @@ namespace backend.Repositories.Interfaces
         Medicine GetByName(string name);
         Medicine GetByID(int id);
         Medicine GetByNameAndDose(string name, int dose);
-        bool ProcessOrder(Medicine medicine, int quantity);
-
+ 
     }
 }

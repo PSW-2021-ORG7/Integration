@@ -80,10 +80,7 @@ namespace Integration_API.Controllers
         [Route("/inventory/check")]
         public IActionResult ProcessOrder([FromBody] Medicine medicine, int quantity)
         {
-            if (_medicineService.ProcessOrder(medicine, quantity))
-                return Ok(true);
-
-            return Ok(false);
+            return Ok(_medicineService.ProcessOrder(medicine, quantity));
         }
 
         [HttpGet]

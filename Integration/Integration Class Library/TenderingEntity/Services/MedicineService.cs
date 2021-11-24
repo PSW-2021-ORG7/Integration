@@ -46,9 +46,19 @@ namespace Integration_Class_Library.TenderingEntity.Services
         public bool ProcessOrder(Medicine medicine, int quantity)
         {
             //CheckIfAvailable -> Update inventory
-            //else -> Add Medicine
-            //     -> Update Inventory
-            return medicineRepository.ProcessOrder(medicine, quantity);
+            if (medicineRepository.MedicineExists(medicine))
+            {
+                MedicineInventory inventory = new MedicineInventory(medicine.Id, quantity);
+                if (medicineInventoryRepository.Update(inventory)) return true;
+                return false;
+            }
+            else
+            {
+                //else -> Add Medicine
+                //     -> Update Inventory
+                return true;
+            }
+
         }
     }
 }
