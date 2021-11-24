@@ -9,6 +9,9 @@
 
   <ItemGroup>
     <Folder Include="SharedModel\" />
+    <Folder Include="TenderingEntity\DAL\Repositories\" />
+    <Folder Include="TenderingEntity\Interfaces\" />
+    <Folder Include="TenderingEntity\Services\" />
   </ItemGroup>
 
   <ItemGroup>

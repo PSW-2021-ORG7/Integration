@@ -27,4 +27,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Integration Class Library\Integration Class Library.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Downloads\" />
+  </ItemGroup>
 </Project>
