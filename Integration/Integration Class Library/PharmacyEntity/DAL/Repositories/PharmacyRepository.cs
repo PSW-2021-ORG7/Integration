@@ -18,11 +18,11 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
             _context = context;
         }
 
-        public Pharmacy CreatePharmacy(Pharmacy pharmacy)
+        public bool CreatePharmacy(Pharmacy pharmacy)
         {
             _context.Add(pharmacy);
-            _context.SaveChangesAsync();
-            return pharmacy;
+            _context.SaveChanges();
+            return true;
         }
 
         public List<Pharmacy> GetAllPharmacies()

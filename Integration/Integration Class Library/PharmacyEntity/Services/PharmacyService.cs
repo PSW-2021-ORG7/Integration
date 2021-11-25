@@ -23,7 +23,7 @@ namespace Integration_Class_Library.PharmacyEntity.Services
             return pharmacyRepository.GetAllPharmacies();
         }
 
-        public Pharmacy PostPharmacy([FromBody] Pharmacy pharmacy)
+        public bool PostPharmacy([FromBody] Pharmacy pharmacy)
         {
             return pharmacyRepository.CreatePharmacy(pharmacy);
         }
