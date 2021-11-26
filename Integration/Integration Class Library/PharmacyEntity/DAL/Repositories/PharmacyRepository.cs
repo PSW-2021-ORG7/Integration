@@ -20,6 +20,8 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
 
         public bool CreatePharmacy(Pharmacy pharmacy)
         {
+            if (_context.Pharmacies.Any(m => m.ApiKeyPharmacy.ToLower().Equals(pharmacy.ApiKeyPharmacy.ToLower()))) return false;
+
             _context.Add(pharmacy);
             _context.SaveChanges();
             return true;
