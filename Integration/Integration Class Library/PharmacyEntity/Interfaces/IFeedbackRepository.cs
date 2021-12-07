@@ -10,9 +10,9 @@ namespace Integration_Class_Library.PharmacyEntity.Interfaces
     {
         Task<Feedback> CreateFeedback(Feedback feedback);
         Task<List<Feedback>> GetAllFeedback();
-        Task<Feedback> GetFeedbackById(String id);
-        Task<int> PutFeedback(String id, Feedback feedback);
-        Task<ActionResult<Feedback>> DeleteFeedback(String id);
-        Task<List<Feedback>> GetFeedbackByPharmacyId(String idPharmacy);
+        Task<Feedback> GetFeedbackById(int id);
+        Task<int> PutFeedback(int id, Feedback feedback);
+        Task<ActionResult<Feedback>> DeleteFeedback(int id);
+        Task<List<Feedback>> GetFeedbackByPharmacyId(int idPharmacy);
     }
 }

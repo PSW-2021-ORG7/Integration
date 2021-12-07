@@ -12,8 +12,8 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
     public class PharmacyRepository : IPharmacyRepository
     {
 
-        private readonly PharmacyDbContext _context;
-        public PharmacyRepository(PharmacyDbContext context)
+        private readonly IntegrationDbContext _context;
+        public PharmacyRepository(IntegrationDbContext context)
         {
             _context = context;
         }
@@ -21,7 +21,7 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
         public Pharmacy CreatePharmacy(Pharmacy pharmacy)
         {
             _context.Add(pharmacy);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
             return pharmacy;
         }
 
@@ -30,12 +30,12 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
             return _context.Pharmacies.ToList();
         }
 
-        public Pharmacy GetPharmacyById(string id)
+        public Pharmacy GetPharmacyById(int id)
         {
             return _context.Pharmacies.Find(id);
         }
 
-        public bool PutPharmacy(string id, Pharmacy pharmacy)
+        public bool PutPharmacy(int id, Pharmacy pharmacy)
         {
             _context.Entry(pharmacy).State = EntityState.Modified;
 
@@ -59,7 +59,7 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
             return true;
         }
 
-        public bool DeletePharmacy(String id)
+        public bool DeletePharmacy(int id)
         {
             var pharmacy = _context.Pharmacies.Find(id);
             if (pharmacy == null)
@@ -72,14 +72,14 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
             return true;
         }
 
-        private bool PharmacyExists(String id)
+        private bool PharmacyExists(int id)
         {
             return _context.Pharmacies.Any(e => e.IdPharmacy == id);
         }
 
         public bool DownloadMedicationSpecification(String fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.0.14", "tester", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.3", "tester", "password")))
             {
                 client.Connect();
 

@@ -8,9 +8,9 @@ namespace Integration_Class_Library.PharmacyEntity.Interfaces
     {
         Pharmacy CreatePharmacy(Pharmacy pharmacy);
         List<Pharmacy> GetAllPharmacies();
-        Pharmacy GetPharmacyById(String id);
-        bool PutPharmacy(String id, Pharmacy pharmacy);
-        bool DeletePharmacy(String id);
+        Pharmacy GetPharmacyById(int id);
+        bool PutPharmacy(int id, Pharmacy pharmacy);
+        bool DeletePharmacy(int id);
         bool DownloadMedicationSpecification(String fileName);
     }
 }

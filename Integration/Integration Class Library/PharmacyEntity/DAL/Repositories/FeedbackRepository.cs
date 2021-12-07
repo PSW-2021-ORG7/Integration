@@ -12,8 +12,8 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
 {
     public class FeedbackRepository : IFeedbackRepository
     {
-        private readonly FeedbackDbContext _context;
-        public FeedbackRepository(FeedbackDbContext context)
+        private readonly IntegrationDbContext _context;
+        public FeedbackRepository(IntegrationDbContext context)
         {
             _context = context;
         }
@@ -24,7 +24,7 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
             return feedback;
         }
 
-        public async Task<ActionResult<Feedback>> DeleteFeedback(string id)
+        public async Task<ActionResult<Feedback>> DeleteFeedback(int id)
         {
             var feedback = await _context.Feedback.FindAsync(id);
             if (feedback == null)
@@ -44,17 +44,17 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
             return await _context.Feedback.ToListAsync();
         }
 
-        public async Task<Feedback> GetFeedbackById(string id)
+        public async Task<Feedback> GetFeedbackById(int id)
         {
             return await _context.Feedback.FindAsync(id);
         }
 
-        public async Task<List<Feedback>> GetFeedbackByPharmacyId(string idPharmacy)
+        public async Task<List<Feedback>> GetFeedbackByPharmacyId(int idPharmacy)
         { 
             return await _context.Feedback.Where(x => x.IdPharmacy.Equals(idPharmacy)).ToListAsync();
         }
 
-        public async Task<int> PutFeedback(string id, Feedback feedback)
+        public async Task<int> PutFeedback(int id, Feedback feedback)
         {
             _context.Entry(feedback).State = EntityState.Modified;
 
@@ -75,7 +75,7 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
             return 0;
         }
 
-        private bool FeedbackExists(String id)
+        private bool FeedbackExists(int id)
         {
             return _context.Feedback.Any(e => e.IdPharmacy == id);
         }
