@@ -49,7 +49,7 @@ namespace Integration_API.Controllers
 
         // PUT: api/pharmacies/id
         [HttpPut("{id}")]
-        public IActionResult PutPharmacy(int id, Pharmacy pharmacy)
+        public IActionResult PutPharmacy(int id, [FromBody] Pharmacy pharmacy)
         {
            return Ok(pharmacyService.PutPharmacy(id, pharmacy));
         }
