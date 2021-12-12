@@ -1,7 +1,12 @@
-﻿using Integration_Class_Library.PharmacyEntity.Interfaces;
+﻿using backend.Repositories.Interfaces;
+using Integration_Class_Library.Models;
+using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Integration_Class_Library.PharmacyEntity.Services;
+using Integration_Class_Library.TenderingEntity.Interfaces;
+using Integration_Class_Library.TenderingEntity.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace Integration_API.Controllers
 {
@@ -9,13 +14,13 @@ namespace Integration_API.Controllers
     [ApiController]
     public class PrescriptionController : Controller
     {
-        private PrescriptionService prescriptionService;
+        private PrescriptionService _prescriptionService;
         private readonly IConfiguration _configuration;
 
-        public PrescriptionController(IPrescriptionRepository prescriptionRepository, IConfiguration configuration)
+        public PrescriptionController(IPrescriptionRepository prescriptionRepository, IMedicineRepository medicineRepository, IConfiguration configuration)
         {
             this._configuration = configuration;
-            prescriptionService = new PrescriptionService(prescriptionRepository);
+            _prescriptionService = new PrescriptionService(prescriptionRepository, medicineRepository);
         }
 
         [HttpGet("test")]
@@ -25,15 +30,21 @@ namespace Integration_API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetPharmacies()
+        public IActionResult GetPrescriptions()
         {
-            return Ok(prescriptionService.GetAllPrescriptions());
+            return Ok(_prescriptionService.GetAllPrescriptions());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetPrescriptionById(int id)
         {
-            return Ok(prescriptionService.GetPrescriptionById(id));
+            return Ok(_prescriptionService.GetPrescriptionById(id));
+        }
+
+        [HttpPost("SFTP")]
+        public IActionResult SendPrescriptionSFTP([FromBody] Prescription prescription)
+        {          
+            return Ok(JsonConvert.SerializeObject(_prescriptionService.SendPrescriptionSFTP(prescription)));
         }
     }
 }

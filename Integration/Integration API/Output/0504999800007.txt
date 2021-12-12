@@ -1,0 +1,1 @@
+{"IdPrescription":1,"Patient":"Simo Simic","PatientJMBG":"0504999800007","Doctor":"Imenko Prezimic","MedicineId":1,"DurationInDays":5,"TimesPerDay":2,"Description":"30 minutes before eating"}
