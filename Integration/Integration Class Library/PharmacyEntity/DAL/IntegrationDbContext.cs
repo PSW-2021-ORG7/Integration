@@ -1,5 +1,6 @@
 ﻿using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Models;
+using Integration_Class_Library.SharedModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Integration_Class_Library.PharmacyEntity.DAL
@@ -12,7 +13,7 @@ namespace Integration_Class_Library.PharmacyEntity.DAL
         }
         public DbSet<Pharmacy> Pharmacies { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
-
-     
+        public DbSet<Prescription> Prescription { get; set; }
+   
     }
 }
