@@ -69,6 +69,15 @@ namespace Integration_API.Controllers
             return medicine;
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<Medicine> GetMedicineById(int id)
+        {
+            Medicine medicine = _medicineService.GetByID(id);
+            if (medicine == null) return NotFound("This medicine doesn't exist.");
+            return medicine;
+
+        }
+
         [HttpDelete("{id}")]
         public IActionResult DeletePharmacy(int id)
         {
