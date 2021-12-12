@@ -13,7 +13,7 @@ namespace Integration_Class_Library.PharmacyEntity.Services
         public PharmacyService(IPharmacyRepository pharmacyRepository) => this.pharmacyRepository = pharmacyRepository;
 
 
-        public Pharmacy GetPharmacyById(String id)
+        public Pharmacy GetPharmacyById(int id)
         {
             return pharmacyRepository.GetPharmacyById(id);
         }
@@ -23,18 +23,18 @@ namespace Integration_Class_Library.PharmacyEntity.Services
             return pharmacyRepository.GetAllPharmacies();
         }
 
-        public Pharmacy PostPharmacy([FromBody] Pharmacy pharmacy)
+        public Pharmacy PostPharmacy(Pharmacy pharmacy)
         {
             return pharmacyRepository.CreatePharmacy(pharmacy);
         }
 
-        public bool PutPharmacy(String id, Pharmacy pharmacy)
+        public bool PutPharmacy(int id, Pharmacy pharmacy)
         {
             return pharmacyRepository.PutPharmacy(id, pharmacy);
         }
 
 
-        public bool DeletePharmacy(String id)
+        public bool DeletePharmacy(int id)
         {
             return pharmacyRepository.DeletePharmacy(id);
         }

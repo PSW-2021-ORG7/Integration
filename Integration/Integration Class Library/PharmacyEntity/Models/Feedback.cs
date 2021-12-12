@@ -8,9 +8,9 @@ namespace Integration_Class_Library.PharmacyEntity.Models
     public class Feedback
     {
         [Key]
-        public String IdFeedback { get; set; }
+        public int IdFeedback { get; set; }
         [Required]
-        public String IdPharmacy { get; set; }
+        public int IdPharmacy { get; set; }
         [Required]
         public String ContentFeedback { get; set; }
     }

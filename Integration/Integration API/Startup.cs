@@ -32,11 +32,7 @@ namespace Integration_API
             services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<IConfiguration>(Configuration);
 
-            services.AddDbContext<PharmacyDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
-            );
-
-            services.AddDbContext<FeedbackDbContext>(options =>
+            services.AddDbContext<IntegrationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
             );
 
