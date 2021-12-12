@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration_Class_Library.Migrations
 {
-    public partial class IntegrationMigration : Migration
+    public partial class PrescriptionMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,25 @@ namespace Integration_Class_Library.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Prescriptions",
+                columns: table => new
+                {
+                    IdPrescription = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Patient = table.Column<string>(nullable: true),
+                    PatientJMBG = table.Column<string>(nullable: true),
+                    Doctor = table.Column<string>(nullable: true),
+                    MedicineId = table.Column<int>(nullable: false),
+                    DurationInDays = table.Column<int>(nullable: false),
+                    TimesPerDay = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prescriptions", x => x.IdPrescription);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Response",
                 columns: table => new
                 {
@@ -46,6 +65,9 @@ namespace Integration_Class_Library.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Pharmacy");
+
+            migrationBuilder.DropTable(
+                name: "Prescriptions");
 
             migrationBuilder.DropTable(
                 name: "Response");

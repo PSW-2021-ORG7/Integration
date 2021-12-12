@@ -61,6 +61,27 @@ namespace Integration_Class_Library.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Doctor")
+                        .HasColumnType("text");
+
+                    b.Property<int>("DurationInDays")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Patient")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PatientJMBG")
+                        .HasColumnType("text");
+
+                    b.Property<int>("TimesPerDay")
+                        .HasColumnType("integer");
+
                     b.HasKey("IdPrescription");
 
                     b.ToTable("Prescriptions");
