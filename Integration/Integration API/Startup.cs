@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using System;
 
 namespace Integration_API
 {
@@ -32,12 +32,15 @@ namespace Integration_API
             services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<IConfiguration>(Configuration);
 
+            string connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING_I");
+            if (connectionString == null) connectionString = Configuration.GetConnectionString("APIConnection");
+            
             services.AddDbContext<IntegrationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
+                options.UseNpgsql(connectionString)
             );
 
             services.AddDbContext<MedicineDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("APIConnection"))
+                options.UseNpgsql(connectionString)
             );
 
             services.AddScoped<IPharmacyRepository, PharmacyRepository>();
