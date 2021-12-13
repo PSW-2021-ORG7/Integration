@@ -8,6 +8,6 @@ namespace Integration_Class_Library.PharmacyEntity.Interfaces
     {
         List<Prescription> GetAllPrescriptions();
         Prescription GetPrescriptionById(int id);
-        string SendPrescriptionSFTP(Prescription prescription, Medicine medicine);
+        void SendPrescriptionSFTP(string filename);
     }
 }

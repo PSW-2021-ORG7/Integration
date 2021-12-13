@@ -26,22 +26,10 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
         {
             return _context.Prescription.Find(id);
         }
-
-        public string SendPrescriptionSFTP(Prescription prescription, Medicine medicine)
+    
+        public void SendPrescriptionSFTP(String filename)
         {
-            try
-            {
-                string filename = prescription.PatientJMBG.Replace(" ", "") + ".txt";
-                string path = Path.Combine(Environment.CurrentDirectory, @"Output\", filename);
-                File.WriteAllText(path, JsonConvert.SerializeObject(prescription));
-                upload(filename);
-                return filename;
-
-            }
-            catch (Exception e)
-            {
-                throw (e);
-            }
+            upload(filename);
 
         }
 
