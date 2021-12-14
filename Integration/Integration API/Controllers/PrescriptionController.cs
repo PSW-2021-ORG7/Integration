@@ -44,7 +44,9 @@ namespace Integration_API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetPrescriptionById(int id)
         {
-            return Ok(_prescriptionService.GetPrescriptionById(id));
+            Prescription response = _prescriptionService.GetPrescriptionById(id);
+            if (response != null) return Ok(response);
+            else return NotFound();
         }
 
         [HttpPost("SFTP")]

@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Integration API\Integration API.csproj" />
     <ProjectReference Include="..\Integration Class Library\Integration Class Library.csproj" />
   </ItemGroup>
 
