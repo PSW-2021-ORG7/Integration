@@ -81,38 +81,38 @@ namespace Integration_API.Controllers
             gfx.DrawString("Prescription", fontTitle, XBrushes.Goldenrod, 5.0, 25.0);
             gfx.DrawString("Patient's name ", font, XBrushes.Goldenrod, 5.0, 40.0);
             gfx.DrawString(prescription.Patient, font, XBrushes.Black,
-                   new XRect(200.0, 35.0, 0.0, 0.0),
-                   XStringFormats.Center);
+                   new XRect(500.0, 35.0, 0.0, 0.0),
+                   XStringFormats.CenterRight);
 
             gfx.DrawString("JMBG ", font, XBrushes.Goldenrod, 5.0, 60.0);
             gfx.DrawString(prescription.PatientJMBG, font, XBrushes.Black,
-                    new XRect(200.0, 55.0, 0.0, 0.0),
-                    XStringFormats.Center);
+                    new XRect(500.0, 55.0, 0.0, 0.0),
+                    XStringFormats.CenterRight);
 
             gfx.DrawString("Duration in days ", font, XBrushes.Goldenrod, 5.0, 80.0);
             gfx.DrawString(prescription.DurationInDays.ToString(), font, XBrushes.Black,
-                    new XRect(200.0, 75.0, 0.0, 0.0),
-                    XStringFormats.Center);
+                    new XRect(500.0, 75.0, 0.0, 0.0),
+                    XStringFormats.CenterRight);
 
             gfx.DrawString("Times per day ", font, XBrushes.Goldenrod, 5.0, 100.0);
             gfx.DrawString(prescription.TimesPerDay.ToString(), font, XBrushes.Black,
-                    new XRect(200.0, 95.0, 0.0, 0.0),
-                    XStringFormats.Center);
+                    new XRect(500.0, 95.0, 0.0, 0.0),
+                    XStringFormats.CenterRight);
 
             gfx.DrawString("Description ", font, XBrushes.Goldenrod, 5.0, 120.0);
             gfx.DrawString(prescription.Description, font, XBrushes.Black,
-                    new XRect(200.0, 115.0, 0.0, 0.0),
-                    XStringFormats.Center);
+                    new XRect(500.0, 115.0, 0.0, 0.0),
+                    XStringFormats.CenterRight);
 
             gfx.DrawString("Doctor's name ", font, XBrushes.Goldenrod, 5.0, 140.0);
             gfx.DrawString(prescription.Doctor, font, XBrushes.Black,
-                    new XRect(200.0, 135.0, 0.0, 0.0),
-                    XStringFormats.Center);
+                    new XRect(500.0, 135.0, 0.0, 0.0),
+                    XStringFormats.CenterRight);
 
             gfx.DrawString("Medicine ", font, XBrushes.Goldenrod, 5.0, 160.0);
             gfx.DrawString(medicine.Name + medicine.DosageInMilligrams, font, XBrushes.Black,
-                    new XRect(200.0, 155.0, 0.0, 0.0),
-                    XStringFormats.Center);
+                    new XRect(500.0, 155.0, 0.0, 0.0),
+                    XStringFormats.CenterRight);
 
             return document;
            
