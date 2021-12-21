@@ -110,7 +110,7 @@ namespace Integration_API.Controllers
                     XStringFormats.CenterRight);
 
             gfx.DrawString("Medicine ", font, XBrushes.Goldenrod, 5.0, 160.0);
-            gfx.DrawString(medicine.Name + medicine.DosageInMilligrams, font, XBrushes.Black,
+            gfx.DrawString(medicine.Name + " " + medicine.DosageInMilligrams + "mg", font, XBrushes.Black,
                     new XRect(500.0, 155.0, 0.0, 0.0),
                     XStringFormats.CenterRight);
 
