@@ -17,4 +17,8 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: 22215
         script: |
-          whoami
+          cd DevOps
+          git pull
+          git checkout bugfix/frontend
+          cd docker-compose
+          docker-compose up --build
