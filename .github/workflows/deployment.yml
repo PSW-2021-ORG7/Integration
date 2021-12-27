@@ -1,0 +1,20 @@
+name: Deploy to server
+on:
+  workflow_dispatch:
+  push:
+    branches:  [master, ci/deployment-to-server]
+jobs:
+
+  Deploy:
+    name: Deploy on server
+    runs-on: ubuntu-latest
+    steps:
+    - name: deploy-on-server
+      uses: appleboy/ssh-action@master
+      with:
+        host: 79.101.34.218
+        username: student
+        key: ${{ secrets.SSH_KEY }}
+        port: 22215
+        script: |
+          whoami
