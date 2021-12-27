@@ -12,6 +12,7 @@ jobs:
     - name: deploy-on-server
       uses: appleboy/ssh-action@master
       with:
+        command_timeout: 200m
         host: 79.101.34.218
         username: student
         key: ${{ secrets.SSH_KEY }}
