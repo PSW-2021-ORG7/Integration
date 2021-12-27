@@ -21,4 +21,5 @@ jobs:
           git pull
           git checkout bugfix/frontend
           cd docker-compose
-          docker-compose up --build
+          docker-compose build
+          docker-compose up
