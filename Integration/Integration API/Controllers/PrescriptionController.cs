@@ -1,10 +1,6 @@
-﻿using backend.Repositories.Interfaces;
-using Integration_Class_Library.Models;
+﻿using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Integration_Class_Library.PharmacyEntity.Services;
-using Integration_Class_Library.TenderingEntity.Interfaces;
-using Integration_Class_Library.TenderingEntity.Models;
-using Integration_Class_Library.TenderingEntity.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -19,14 +15,12 @@ namespace Integration_API.Controllers
     public class PrescriptionController : Controller
     {
         private PrescriptionService _prescriptionService;
-        private MedicineService _medicineService;
         private readonly IConfiguration _configuration;
 
-        public PrescriptionController(IPrescriptionRepository prescriptionRepository, IMedicineInventoryRepository medicineInventoryRepository, IMedicineRepository medicineRepository, IConfiguration configuration)
+        public PrescriptionController(IPrescriptionRepository prescriptionRepository, IConfiguration configuration)
         {
-            this._medicineService = new MedicineService(medicineRepository, medicineInventoryRepository);
             this._configuration = configuration;
-            _prescriptionService = new PrescriptionService(prescriptionRepository, medicineRepository);
+            _prescriptionService = new PrescriptionService(prescriptionRepository);
         }
 
         [HttpGet("test")]
@@ -67,9 +61,10 @@ namespace Integration_API.Controllers
             }
         }
 
+        // TO DO: Create document on the side of hospital
         private PdfDocument createDocument(Prescription prescription)
         {          
-            Medicine medicine = _medicineService.GetByID(prescription.MedicineId);
+            //Medicine medicine = _medicineService.GetByID(prescription.MedicineId);
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             PdfDocument document = new PdfDocument();
             document.Info.Title = prescription.PatientJMBG;
@@ -110,9 +105,11 @@ namespace Integration_API.Controllers
                     XStringFormats.CenterRight);
 
             gfx.DrawString("Medicine ", font, XBrushes.Goldenrod, 5.0, 160.0);
+            /*
             gfx.DrawString(medicine.Name + " " + medicine.DosageInMilligrams + "mg", font, XBrushes.Black,
                     new XRect(500.0, 155.0, 0.0, 0.0),
                     XStringFormats.CenterRight);
+            */
 
             return document;
            

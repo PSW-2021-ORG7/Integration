@@ -1,10 +1,6 @@
-using backend.Repositories.Interfaces;
 using Integration_Class_Library.PharmacyEntity.DAL;
 using Integration_Class_Library.PharmacyEntity.DAL.Repositories;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
-using Integration_Class_Library.TenderingEntity.DAL;
-using Integration_Class_Library.TenderingEntity.DAL.Repositories;
-using Integration_Class_Library.TenderingEntity.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -39,16 +35,9 @@ namespace Integration_API
                 options.UseNpgsql(connectionString)
             );
 
-            services.AddDbContext<MedicineDbContext>(options =>
-                options.UseNpgsql(connectionString)
-            );
 
             services.AddScoped<IPharmacyRepository, PharmacyRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
-            services.AddScoped<IMedicineRepository, MedicineRepository>();
-            services.AddScoped<IMedicineInventoryRepository, MedicineInventoryRepository>();
-            services.AddScoped<IIngredientRepository, IngredientRepository>();
-            services.AddScoped<IMedicineCombinationRepository, MedicineCombinationRepository>();
             services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 
 
