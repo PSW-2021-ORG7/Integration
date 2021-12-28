@@ -5,7 +5,7 @@ on:
     branches:  [master]
 jobs:
 
-  docker:
+  Build-and-publish-docker-image:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
@@ -28,6 +28,7 @@ jobs:
   Deploy:
     name: Deploy on server
     runs-on: ubuntu-latest
+    needs: Build-and-publish-docker-image
     steps:
     - name: deploy-on-server
       uses: appleboy/ssh-action@master
