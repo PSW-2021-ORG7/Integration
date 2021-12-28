@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration_Class_Library.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    [Migration("20211207182411_IntegrationMigration")]
-    partial class IntegrationMigration
+    [Migration("20211213164525_PrescriptionMigration2")]
+    partial class PrescriptionMigration2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,6 +54,39 @@ namespace Integration_Class_Library.Migrations
                     b.HasKey("IdPharmacy");
 
                     b.ToTable("Pharmacy");
+                });
+
+            modelBuilder.Entity("Integration_Class_Library.Models.Prescription", b =>
+                {
+                    b.Property<int>("IdPrescription")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Doctor")
+                        .HasColumnType("text");
+
+                    b.Property<int>("DurationInDays")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Patient")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PatientJMBG")
+                        .HasColumnType("text");
+
+                    b.Property<int>("TimesPerDay")
+                        .HasColumnType("integer");
+
+                    b.HasKey("IdPrescription");
+
+                    b.ToTable("Prescriptions");
                 });
 
             modelBuilder.Entity("Integration_Class_Library.PharmacyEntity.Models.Feedback", b =>

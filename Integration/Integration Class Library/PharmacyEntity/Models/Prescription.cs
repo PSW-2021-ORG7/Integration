@@ -8,12 +8,12 @@ namespace Integration_Class_Library.Models
     {
         [Key]
         public int IdPrescription { get; set; }
-        string Patient { get; set; }
-        string PatientJMBG { get; set; }
-        string Doctor { get; set; }
-        int MedicineId { get; set; }
-        int DurationInDays { get; set; }
-        int TimesPerDay { get; set; }
-        string Description { get; set; }
+        public string Patient { get; set; }
+        public string PatientJMBG { get; set; }
+        public string Doctor { get; set; }
+        public int MedicineId { get; set; }
+        public int DurationInDays { get; set; }
+        public int TimesPerDay { get; set; }
+        public string Description { get; set; }
     }
 }

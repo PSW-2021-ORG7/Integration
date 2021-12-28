@@ -49,8 +49,9 @@ namespace Integration_API
             services.AddScoped<IMedicineInventoryRepository, MedicineInventoryRepository>();
             services.AddScoped<IIngredientRepository, IngredientRepository>();
             services.AddScoped<IMedicineCombinationRepository, MedicineCombinationRepository>();
+            services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 
-            
+
 
             //Enable CORS
             services.AddCors(c =>
