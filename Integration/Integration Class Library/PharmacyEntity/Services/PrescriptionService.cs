@@ -1,24 +1,18 @@
-﻿using backend.Repositories.Interfaces;
-using Integration_Class_Library.Models;
+﻿using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
-using Integration_Class_Library.TenderingEntity.Models;
-using Renci.SshNet;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace Integration_Class_Library.PharmacyEntity.Services
 {
     public class PrescriptionService
     {
         IPrescriptionRepository prescriptionRepository;
-        IMedicineRepository medicineRepository;
 
-        public PrescriptionService(IPrescriptionRepository prescriptionRepository, IMedicineRepository medicineRepository)
+        public PrescriptionService(IPrescriptionRepository prescriptionRepository)
         {
             this.prescriptionRepository = prescriptionRepository;
-            this.medicineRepository = medicineRepository;
+
         }
 
 

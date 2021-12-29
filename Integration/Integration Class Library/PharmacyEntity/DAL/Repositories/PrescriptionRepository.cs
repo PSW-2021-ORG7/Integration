@@ -1,6 +1,5 @@
 ﻿using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
-using Integration_Class_Library.TenderingEntity.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
