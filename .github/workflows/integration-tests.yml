@@ -29,6 +29,7 @@ jobs:
       - name: Generate init.sql script
         run: |
               cd ${{env.PROJECT_PATH}}
+              dotnet tool install -g dotnet-ef && \
               dotnet ef migrations script --context IntegrationDbContext  -p "Integration API/Integration API.csproj" -o ./init.sql
     
       - name: Start dependencies (docker-compose)
