@@ -12,6 +12,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.21" />
     <PackageReference Include="OpenCover" Version="4.7.1221" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
@@ -22,12 +23,5 @@
     <ProjectReference Include="..\Integration API\Integration API.csproj" />
     <ProjectReference Include="..\Integration Class Library\Integration Class Library.csproj" />
   </ItemGroup>
-
-  <Target Name="CopyDepsJsonFiles" AfterTargets="Publish">
-  <ItemGroup>
-    <DepsJsonFiles Include="$(TargetDir)*.deps.json"/>
-  </ItemGroup>
-  <Copy SourceFiles="@(DepsJsonFiles)" DestinationFolder="$(PublishDir)" />
-  </Target> 
 
 </Project>
