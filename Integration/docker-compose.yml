@@ -9,7 +9,7 @@ services:
       environment:
         POSTGRES_PASSWORD: psql
         POSTGRES_USER: postgres
-        POSTGRES_DB: integration
+        POSTGRES_DB: Hospital
       volumes:
         - type: bind
           source: ./init.sql
