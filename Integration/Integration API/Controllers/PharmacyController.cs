@@ -7,6 +7,8 @@ using Integration_Class_Library.PharmacyEntity.Services;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using Integration_API.DTO;
+using Integration_Class_Library.Events.PharmacyRegisteredEvent;
+using HospitalClassLibrary.Events.LogEvent;
 
 namespace Integration_API.Controllers
 {
@@ -19,10 +21,11 @@ namespace Integration_API.Controllers
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
 
-        public PharmacyController(IPharmacyRepository pharmacyRepository, IConfiguration configuration, IMapper mapper)
+        public PharmacyController(IPharmacyRepository pharmacyRepository, IConfiguration configuration, IMapper mapper,
+            ILogEventService<PharmacyRegisteredEventParams> logEventService)
         {
             this._configuration = configuration;
-            pharmacyService = new PharmacyService(pharmacyRepository);
+            pharmacyService = new PharmacyService(pharmacyRepository, logEventService);
             _mapper = mapper;
         }
 

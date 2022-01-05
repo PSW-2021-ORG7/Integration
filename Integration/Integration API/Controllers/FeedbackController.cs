@@ -1,4 +1,6 @@
-﻿using Integration_API.Filters;
+﻿using HospitalClassLibrary.Events.LogEvent;
+using Integration_API.Filters;
+using Integration_Class_Library.Events.FeedbackCreatedEvent;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Integration_Class_Library.PharmacyEntity.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +15,10 @@ namespace Integration_API.Controllers
     public class FeedbackController : Controller
     {
         private readonly IFeedbackRepository _feedback;
-        public FeedbackController(IFeedbackRepository feedback)
+        private readonly ILogEventService<FeedbackCreatedEventParams> _logEventService;
+        public FeedbackController(IFeedbackRepository feedback, ILogEventService<FeedbackCreatedEventParams> logEventService)
         {
+            _logEventService = logEventService;
             _feedback = feedback;
         }
 
@@ -44,7 +48,9 @@ namespace Integration_API.Controllers
         [HttpPost]
         public async Task<ActionResult<Feedback>> PostFeedback([FromBody] Feedback feedback)
         {
-            return Ok(await _feedback.CreateFeedback(feedback));
+            Feedback updated = await _feedback.CreateFeedback(feedback);
+            _logEventService.LogEvent(new FeedbackCreatedEventParams(updated.IdFeedback));
+            return Ok(updated);
         }
 
         // PUT: api/feedback/id
