@@ -3,7 +3,7 @@ using Integration_Class_Library.PharmacyEntity.Models;
 using Integration_Class_Library.SharedModel;
 using Microsoft.EntityFrameworkCore;
 
-namespace Integration_Class_Library.PharmacyEntity.DAL
+namespace Integration_Class_Library.DAL
 {
     public class IntegrationDbContext : DbContext
     {
