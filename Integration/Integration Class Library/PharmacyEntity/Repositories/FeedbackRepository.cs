@@ -1,14 +1,14 @@
-﻿using Integration_Class_Library.PharmacyEntity.Interfaces;
+﻿using Integration_Class_Library.DAL;
+using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Integration_Class_Library.PharmacyEntity.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
+namespace Integration_Class_Library.PharmacyEntity.Repositories
 {
     public class FeedbackRepository : IFeedbackRepository
     {

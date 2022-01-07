@@ -1,6 +1,6 @@
-using Integration_Class_Library.PharmacyEntity.DAL;
-using Integration_Class_Library.PharmacyEntity.DAL.Repositories;
+using Integration_Class_Library.DAL;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
+using Integration_Class_Library.PharmacyEntity.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
