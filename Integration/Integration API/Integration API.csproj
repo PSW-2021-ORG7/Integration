@@ -38,6 +38,5 @@
 
   <ItemGroup>
     <Folder Include="Downloads\" />
-    <Folder Include="RabbitMqServices\" />
   </ItemGroup>
 </Project>
