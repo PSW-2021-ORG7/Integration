@@ -1,4 +1,5 @@
-﻿using Integration_Class_Library.Tendering.Models;
+﻿using Integration_Class_Library.Tendering.Interfaces;
+using Integration_Class_Library.Tendering.Models;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
@@ -7,9 +8,18 @@ using System.Text;
 
 namespace Integration_Class_Library.Tendering.Services
 {
-    public class TenderingService
+    public class TenderService
     {
-        public TenderingService() { }
+        ITenderRepository _tenderRepository;
+        public TenderService(ITenderRepository tenderRepository) 
+        {
+            this._tenderRepository = tenderRepository;
+        }
+
+        public bool CreateTender(Tender tender)
+        {
+            return _tenderRepository.CreateTender(tender);
+        }
 
         public void sendRequestToPharmacy(TenderRequest tenderRequest)
         {

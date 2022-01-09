@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration_Class_Library.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    [Migration("20220108041317_IntegrationMigration")]
-    partial class IntegrationMigration
+    [Migration("20220109221227_TendersMigration")]
+    partial class TendersMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

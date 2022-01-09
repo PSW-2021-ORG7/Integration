@@ -36,16 +36,7 @@ namespace Integration_API.RabbitMQServices
                 byte[] body = ea.Body.ToArray();
                 var jsonBody = Encoding.UTF8.GetString(body);
                 TenderOfferDTO offer = new TenderOfferDTO();
-                try
-                {   // try deserialize with default datetime format
-                    offer = JsonConvert.DeserializeObject<TenderOfferDTO>(jsonBody);
-                }
-                catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
-                {
-                    offer = JsonConvert.DeserializeObject<TenderOfferDTO>(jsonBody);
-                }
-
-
+                offer = JsonConvert.DeserializeObject<TenderOfferDTO>(jsonBody);
             };
             channel.BasicConsume(queue: "tendering-offers-queue",
                                     autoAck: true,

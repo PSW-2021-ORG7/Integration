@@ -1,6 +1,8 @@
 using Integration_Class_Library.DAL;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Integration_Class_Library.PharmacyEntity.Repositories;
+using Integration_Class_Library.Tendering.Interfaces;
+using Integration_Class_Library.Tendering.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -39,8 +41,7 @@ namespace Integration_API
             services.AddScoped<IPharmacyRepository, PharmacyRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
-
-
+            services.AddScoped<ITenderRepository, TenderRepository>();
 
             //Enable CORS
             services.AddCors(c =>
