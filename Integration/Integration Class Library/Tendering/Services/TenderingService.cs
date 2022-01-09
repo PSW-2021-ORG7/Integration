@@ -17,7 +17,7 @@ namespace Integration_Class_Library.Tendering.Services
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: "tendering-queue",
+                channel.QueueDeclare(queue: "tendering-requests-queue",
                                      durable: false,
                                      exclusive: false,
                                      autoDelete: false,
@@ -27,7 +27,7 @@ namespace Integration_Class_Library.Tendering.Services
                 var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tenderRequestToSend));
 
                 channel.BasicPublish(exchange: "",
-                                     routingKey: "tendering-queue",
+                                     routingKey: "tendering-requests-queue",
                                      basicProperties: null,
                                      body: body);
             }

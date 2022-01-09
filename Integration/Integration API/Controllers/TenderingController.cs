@@ -28,6 +28,7 @@ namespace Integration_API.Controllers
         [HttpPost("sendRequest")]
         public IActionResult SendTenderRequest([FromBody] TenderRequest tenderRequest)
         {
+            tenderRequest.TenderKey = Guid.NewGuid().ToString(); 
             _tenderingService.sendRequestToPharmacy(tenderRequest);
             return Ok();
         }
