@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Integration_Class_Library.Tendering.Models;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Integration_Class_Library.Tendering.Services
     {
         public TenderingService() { }
 
-        public void sendRequestToPharmacy(String messageToSend)
+        public void sendRequestToPharmacy(TenderRequest tenderRequest)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using (var connection = factory.CreateConnection())
@@ -22,8 +23,8 @@ namespace Integration_Class_Library.Tendering.Services
                                      autoDelete: false,
                                      arguments: null);
 
-                String message = messageToSend;
-                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+                TenderRequest tenderRequestToSend = tenderRequest;
+                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tenderRequestToSend));
 
                 channel.BasicPublish(exchange: "",
                                      routingKey: "tendering-queue",

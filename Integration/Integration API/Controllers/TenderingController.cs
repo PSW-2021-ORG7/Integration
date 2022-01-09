@@ -1,4 +1,5 @@
-﻿using Integration_Class_Library.Tendering.Services;
+﻿using Integration_Class_Library.Tendering.Models;
+using Integration_Class_Library.Tendering.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -25,10 +26,10 @@ namespace Integration_API.Controllers
         }
 
         [HttpPost("sendRequest")]
-        public IActionResult GetTest([FromBody] String messageToSend)
+        public IActionResult SendTenderRequest([FromBody] TenderRequest tenderRequest)
         {
-            _tenderingService.sendRequestToPharmacy(messageToSend);
-            return Ok("It works");
+            _tenderingService.sendRequestToPharmacy(tenderRequest);
+            return Ok();
         }
 
     }
