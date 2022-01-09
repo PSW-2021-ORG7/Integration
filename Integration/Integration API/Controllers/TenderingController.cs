@@ -1,4 +1,6 @@
-﻿using Integration_Class_Library.Tendering.Models;
+﻿using Integration_Class_Library.Tendering;
+using Integration_Class_Library.Tendering.Interfaces;
+using Integration_Class_Library.Tendering.Models;
 using Integration_Class_Library.Tendering.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -12,17 +14,24 @@ namespace Integration_API.Controllers
     [Route("api/[controller]")]
     public class TenderingController : Controller
     {
-        private TenderingService _tenderingService;
+        private TenderService _tenderingService;
 
-        public TenderingController()
+        public TenderingController(ITenderRepository tenderRepository)
         {
-            _tenderingService = new TenderingService();
+            _tenderingService = new TenderService(tenderRepository);
         }
 
         [HttpGet("test")]
         public IActionResult GetTest()
         {
             return Ok("It works");
+        }
+
+        [HttpPost("addTender")]
+        public IActionResult CreateTender([FromBody] Tender tender)
+        {
+            if (_tenderingService.CreateTender(tender)) return Ok("Success!");
+            else return BadRequest();
         }
 
         [HttpPost("sendRequest")]
