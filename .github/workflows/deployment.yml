@@ -42,5 +42,4 @@ jobs:
           git pull
           git checkout bugfix/frontend
           cd docker-compose
-          docker-compose build
-          docker-compose up -d
+          docker stack deploy stack --compose-file docker-compose.yml
