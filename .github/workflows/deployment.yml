@@ -33,10 +33,10 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         command_timeout: 200m
-        host: 79.101.34.218
+        host:  ${{ secrets.SSH_IP_ADDRESS }}
         username: student
         key: ${{ secrets.SSH_KEY }}
-        port: 22215
+        port:  ${{ secrets.SSH_PORT }}
         script: |
           cd DevOps
           git pull
