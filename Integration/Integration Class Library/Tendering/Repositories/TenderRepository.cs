@@ -1,6 +1,7 @@
 ﻿using Integration_Class_Library.DAL;
 using Integration_Class_Library.Tendering.Interfaces;
 using Integration_Class_Library.Tendering.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -43,7 +44,7 @@ namespace Integration_Class_Library.Tendering.Repositories
                 _context.SaveChanges();
                 return true;
             }
-            catch
+            catch(Exception e)
             {
                 return false;
             }          

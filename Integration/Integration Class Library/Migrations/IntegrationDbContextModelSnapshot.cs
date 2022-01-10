@@ -150,11 +150,11 @@ namespace Integration_Class_Library.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Key")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("TenderKey")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
