@@ -7,7 +7,6 @@ namespace Integration_API.DTO
 {
     public class TenderDTO
     {
-        public int Id { get; set; }
         public bool IsActive { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }

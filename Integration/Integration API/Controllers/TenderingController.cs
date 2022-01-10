@@ -38,7 +38,10 @@ namespace Integration_API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetTenderByID(int id)
         {
-            return Ok(_tenderingService.GetTenderById(id));
+            Tender tender = _tenderingService.GetTenderById(id);
+            if (tender != null) return Ok(tender);
+            else return NotFound();
+
         }
 
 
