@@ -1,4 +1,5 @@
-﻿using Integration_Class_Library.Tendering;
+﻿using Integration_API.DTO;
+using Integration_Class_Library.Tendering;
 using Integration_Class_Library.Tendering.Interfaces;
 using Integration_Class_Library.Tendering.Models;
 using Integration_Class_Library.Tendering.Services;
@@ -34,16 +35,16 @@ namespace Integration_API.Controllers
         }
 
         [HttpPost("addTender")]
-        public IActionResult CreateTender([FromBody] Tender tender)
+        public IActionResult CreateTender([FromBody] TenderDTO tenderDTO)
         {
-            if (_tenderingService.CreateTender(tender)) return Ok("Success!");
+            Tender tender = new Tender(tenderDTO.IsActive, tenderDTO.StartDate, tenderDTO.EndDate, tenderDTO.IdWinnerPharmacy);
+            if (_tenderingService.CreateTender(tender)) return Ok(tender);
             else return BadRequest();
         }
 
         [HttpPost("sendRequest")]
         public IActionResult SendTenderRequest([FromBody] TenderRequest tenderRequest)
         {
-            tenderRequest.TenderKey = Guid.NewGuid().ToString(); 
             _tenderingService.sendRequestToPharmacy(tenderRequest);
             return Ok();
         }
