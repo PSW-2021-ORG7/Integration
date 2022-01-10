@@ -1,3 +1,5 @@
+using HospitalClassLibrary.Events.LogEvent;
+using Integration_Class_Library.Events.PharmacyRegisteredEvent;
 using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Integration_Class_Library.PharmacyEntity.Services;
@@ -11,10 +13,11 @@ namespace IntegrationTests.Unit
 
         private readonly PharmacyService _sut;
         private readonly Mock<IPharmacyRepository> _pharmacyRepoMoq = new Mock<IPharmacyRepository>();
+        private readonly Mock<ILogEventService<PharmacyRegisteredEventParams>> _logServiceMoq = new Mock<ILogEventService<PharmacyRegisteredEventParams>>();
 
         public PharmacyServiceTests()
         {
-            _sut = new PharmacyService(_pharmacyRepoMoq.Object);
+            _sut = new PharmacyService(_pharmacyRepoMoq.Object, _logServiceMoq.Object);
         }
 
         [Fact]

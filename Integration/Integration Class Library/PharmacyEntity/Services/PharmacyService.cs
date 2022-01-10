@@ -1,4 +1,6 @@
-﻿using Integration_Class_Library.Models;
+﻿using HospitalClassLibrary.Events.LogEvent;
+using Integration_Class_Library.Events.PharmacyRegisteredEvent;
+using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,9 +11,14 @@ namespace Integration_Class_Library.PharmacyEntity.Services
     public class PharmacyService
     {
         IPharmacyRepository pharmacyRepository;
+        private readonly ILogEventService<PharmacyRegisteredEventParams> _logEventService;
 
-        public PharmacyService(IPharmacyRepository pharmacyRepository) => this.pharmacyRepository = pharmacyRepository;
+        public PharmacyService(IPharmacyRepository pharmacyRepository, ILogEventService<PharmacyRegisteredEventParams> logEventService)
+        {
+            this.pharmacyRepository = pharmacyRepository;
+            _logEventService = logEventService;
 
+        }
 
         public Pharmacy GetPharmacyById(int id)
         {
@@ -25,7 +32,9 @@ namespace Integration_Class_Library.PharmacyEntity.Services
 
         public Pharmacy PostPharmacy(Pharmacy pharmacy)
         {
-            return pharmacyRepository.CreatePharmacy(pharmacy);
+            Pharmacy created = pharmacyRepository.CreatePharmacy(pharmacy);
+            _logEventService.LogEvent(new PharmacyRegisteredEventParams(created.IdPharmacy));
+            return created;
         }
 
         public bool PutPharmacy(int id, Pharmacy pharmacy)

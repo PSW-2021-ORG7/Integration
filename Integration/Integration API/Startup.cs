@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using HospitalClassLibrary.Events.LogEvent;
+using Integration_Class_Library.Events.FeedbackCreatedEvent;
+using Integration_Class_Library.Events.PharmacyRegisteredEvent;
 
 namespace Integration_API
 {
@@ -40,7 +43,11 @@ namespace Integration_API
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
 
-
+            //Events
+            services.AddTransient<IFeedbackCreatedEventRepository, FeedbackCreatedEventDatabase>();
+            services.AddTransient<IPharmacyRegisteredEventRepository, PharmacyRegisteredEventDatabase>();
+            services.AddScoped<ILogEventService<FeedbackCreatedEventParams>, FeedbackCreatedEventService>();
+            services.AddScoped<ILogEventService<PharmacyRegisteredEventParams>, PharmacyRegisteredEventService>();
 
             //Enable CORS
             services.AddCors(c =>
