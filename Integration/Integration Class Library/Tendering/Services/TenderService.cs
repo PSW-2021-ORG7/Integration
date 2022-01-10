@@ -30,6 +30,10 @@ namespace Integration_Class_Library.Tendering.Services
         {
             return _tenderRepository.GetAllTenders();
         }
+        public List<Tender> GetAllActiveTenders()
+        {
+            return _tenderRepository.GetActiveTenders();
+        }
 
         public void AddTenderOffer(TenderOffer offer)
         {

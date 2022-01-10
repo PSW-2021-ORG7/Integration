@@ -22,7 +22,7 @@ namespace Integration_Class_Library.Tendering.Repositories
 
         public List<Tender> GetActiveTenders()
         {
-            return _context.Tenders.Where(m => m.IsActive == false).ToList();
+            return _context.Tenders.Where(m => m.IsActive == true).ToList();
         }
 
         public Tender GetTenderById(int id)
