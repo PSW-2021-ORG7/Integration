@@ -8,7 +8,6 @@ namespace Integration_Class_Library.Tendering.Models
     {
         public String MedicineName { get; set; }
         public int DosageInMilligrams { get; set; }
-        public String Manufacturer { get; set; }
         public int RequiredQuantity { get; set; }
 
         public TenderRequestItem() { }

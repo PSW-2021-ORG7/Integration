@@ -38,6 +38,15 @@ namespace Integration_Class_Library.Tendering
 
         public Tender() { }
 
+        public void setActivity(bool isActive)
+        {
+            IsActive = isActive;
+        }
+
+        public void setWinner(int id)
+        {
+            IdWinnerPharmacy = id;
+        }
 
     }
 }

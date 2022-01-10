@@ -78,5 +78,15 @@ namespace Integration_API.Controllers
             return Ok();
         }
 
+        [HttpPut("setWinner/{idTender}/{idWinner}")]
+        public IActionResult SetWinner(int idTender, int idWinner)
+        {
+            bool retVal = _tenderingService.SetWinner(idTender, idWinner);
+            if (retVal) return Ok(retVal);
+            else return BadRequest();
+ 
+        }
+
+
     }
 }
