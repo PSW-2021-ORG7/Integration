@@ -35,6 +35,13 @@ namespace Integration_API.Controllers
             return Ok(_tenderingService.GetAllTenders());
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetTenderByID(int id)
+        {
+            return Ok(_tenderingService.GetTenderById(id));
+        }
+
+
         [HttpGet("getActive")]
         public IActionResult GetAllActiveTenders()
         {
