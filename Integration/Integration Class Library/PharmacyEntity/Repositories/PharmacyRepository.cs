@@ -36,6 +36,11 @@ namespace Integration_Class_Library.PharmacyEntity.Repositories
             return _context.Pharmacies.Find(id);
         }
 
+        public Pharmacy GetPharmacyByApiKey(string ApiKey)
+        {
+            return _context.Pharmacies.SingleOrDefault(m => m.ApiKeyPharmacy.Equals(ApiKey));
+        }
+
         public bool PutPharmacy(int id, Pharmacy pharmacy)
         {
             _context.Entry(pharmacy).State = EntityState.Modified;

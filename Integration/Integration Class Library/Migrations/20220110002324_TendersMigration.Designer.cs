@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Integration_Class_Library.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    [Migration("20220109221227_TendersMigration")]
+    [Migration("20220110002324_TendersMigration")]
     partial class TendersMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,6 +152,9 @@ namespace Integration_Class_Library.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -172,23 +175,17 @@ namespace Integration_Class_Library.Migrations
                                 .HasColumnType("integer")
                                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                            b1.Property<int>("DosageInMilligrams")
+                            b1.Property<int>("AvailableQuantity")
                                 .HasColumnType("integer");
 
-                            b1.Property<string>("Manufacturer")
-                                .HasColumnType("text");
+                            b1.Property<int>("MedicineDosage")
+                                .HasColumnType("integer");
 
                             b1.Property<string>("MedicineName")
                                 .HasColumnType("text");
 
                             b1.Property<int>("MissingQuantity")
                                 .HasColumnType("integer");
-
-                            b1.Property<double>("PriceForAllAvailableEntity")
-                                .HasColumnType("double precision");
-
-                            b1.Property<double>("PriceForAllRequiredEntity")
-                                .HasColumnType("double precision");
 
                             b1.Property<double>("PriceForSingleEntity")
                                 .HasColumnType("double precision");

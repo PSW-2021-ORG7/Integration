@@ -29,6 +29,11 @@ namespace Integration_Class_Library.Tendering.Repositories
             return _context.Tenders.SingleOrDefault(m => m.Id == id);
         }
 
+        public Tender GetTenderByKey(string key)
+        {
+            return _context.Tenders.SingleOrDefault(m => m.TenderKey.Equals(key));
+        }
+
         public bool CreateTender(Tender tender)
         {
 
@@ -50,11 +55,11 @@ namespace Integration_Class_Library.Tendering.Repositories
             return _context.TenderOffers.SingleOrDefault(m => m.IdTender == tenderId);
         }
 
-        public bool CreateTenderOffer(TenderOffer offer)
+        public void CreateTenderOffer(TenderOffer offer)
         {
             _context.Add(offer);
             _context.SaveChanges();
-            return true;
+            
         }
     }
 }
