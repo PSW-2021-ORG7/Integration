@@ -56,6 +56,11 @@ namespace Integration_Class_Library.Tendering.Repositories
             return _context.TenderOffers.SingleOrDefault(m => m.IdTender == tenderId);
         }
 
+        public List<TenderOffer> GetAllTenderOffersByTenderId(int id)
+        {
+            return _context.TenderOffers.Where(m => m.IdTender == id).ToList();
+        }
+
         public void CreateTenderOffer(TenderOffer offer)
         {
             _context.Add(offer);

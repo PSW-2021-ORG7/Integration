@@ -68,7 +68,7 @@ namespace Integration_API.RabbitMQServices
             return Task.CompletedTask;
         }
 
-        private TenderOffer CreateOffer (TenderOfferDTO tenderOfferDTO)
+        public TenderOffer CreateOffer (TenderOfferDTO tenderOfferDTO)
         {
             //TenderOffer offer = Mapping.Mapper.Map<TenderOffer>(tenderOfferDTO);
             TenderOffer offer = new TenderOffer(Convert.ToDouble(tenderOfferDTO.PriceForAllAvailable), Convert.ToDouble(tenderOfferDTO.PriceForAllRequired), Convert.ToInt32(tenderOfferDTO.TotalNumberMissingMedicine));

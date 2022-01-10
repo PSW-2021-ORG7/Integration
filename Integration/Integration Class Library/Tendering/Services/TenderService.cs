@@ -36,6 +36,11 @@ namespace Integration_Class_Library.Tendering.Services
             _tenderRepository.CreateTenderOffer(offer);
         }
 
+        public List<TenderOffer> GetAllTenderOffersByTenderId(int id)
+        {
+            return _tenderRepository.GetAllTenderOffersByTenderId(id);
+        }
+
         public void sendRequestToPharmacy(TenderRequest tenderRequest)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
