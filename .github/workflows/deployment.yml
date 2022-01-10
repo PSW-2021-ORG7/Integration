@@ -38,7 +38,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port:  ${{ secrets.SSH_PORT }}
         script: |
-          docker system prune -a ----volumes
+          docker system prune -a --volumes --force
           cd DevOps
           git pull
           git checkout bugfix/frontend
