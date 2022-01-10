@@ -72,16 +72,27 @@ namespace Integration_Class_Library.Tendering.Repositories
         {
             try
             {
-                _context.Tenders.Attach(tender);
-                _context.Entry(tender).Property(x => x.IdWinnerPharmacy).IsModified = true;
-                _context.Entry(tender).Property(x => x.IsActive).IsModified = true;
-                _context.SaveChanges();
+                UpdateTenderFields(tender);
                 return true;
             } catch (Exception e)
             {
                 return false;
             }
             
+        }
+
+        public bool CloseTender(Tender tender)
+        {
+            UpdateTenderFields(tender);
+            return true;
+        }
+
+        private void UpdateTenderFields(Tender tender)
+        {
+            _context.Tenders.Attach(tender);
+            _context.Entry(tender).Property(x => x.IdWinnerPharmacy).IsModified = true;
+            _context.Entry(tender).Property(x => x.IsActive).IsModified = true;
+            _context.SaveChanges();
         }
     }
 }

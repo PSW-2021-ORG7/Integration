@@ -60,6 +60,14 @@ namespace Integration_Class_Library.Tendering.Services
 
         }
 
+        public bool CloseTender(int idTender)
+        {
+            Tender tender = GetTenderById(idTender);
+            tender.setActivity(false);
+            return _tenderRepository.SetWinner(tender);
+
+        }
+
         public void sendRequestToPharmacy(TenderRequest tenderRequest)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };
