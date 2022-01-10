@@ -30,6 +30,12 @@ namespace Integration_Class_Library.Tendering.Services
         {
             return _tenderRepository.GetAllTenders();
         }
+
+        public Tender GetTenderById(int id)
+        {
+            return _tenderRepository.GetTenderById(id);
+        }
+
         public List<Tender> GetAllActiveTenders()
         {
             return _tenderRepository.GetActiveTenders();
