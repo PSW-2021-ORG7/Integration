@@ -10,9 +10,11 @@ namespace Integration_Class_Library.Tendering
     {
         [Key]
         public int Id { get; private set; }
+        public string TenderKey { get; set; } // Ne radi sa private set?
         public bool IsActive { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public int IdWinnerPharmacy { get; private set; }
+
     }
 }

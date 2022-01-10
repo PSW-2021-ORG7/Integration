@@ -10,8 +10,9 @@ namespace Integration_Class_Library.Tendering.Interfaces
         List<Tender> GetAllTenders();
         List<Tender> GetActiveTenders();
         Tender GetTenderById(int id);
+        Tender GetTenderByKey(string key);
         bool CreateTender(Tender tender);
         TenderOffer GetTenderOfferByTenderId(int id);
-        bool CreateTenderOffer(TenderOffer offer);
+        void CreateTenderOffer(TenderOffer offer);
     }
 }

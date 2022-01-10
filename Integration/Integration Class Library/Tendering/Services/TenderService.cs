@@ -21,6 +21,21 @@ namespace Integration_Class_Library.Tendering.Services
             return _tenderRepository.CreateTender(tender);
         }
 
+        public Tender GetTenderByKey(string key)
+        {
+            return _tenderRepository.GetTenderByKey(key);
+        }
+
+        public List<Tender> GetAllTenders()
+        {
+            return _tenderRepository.GetAllTenders();
+        }
+
+        public void AddTenderOffer(TenderOffer offer)
+        {
+            _tenderRepository.CreateTenderOffer(offer);
+        }
+
         public void sendRequestToPharmacy(TenderRequest tenderRequest)
         {
             var factory = new ConnectionFactory() { HostName = "localhost" };

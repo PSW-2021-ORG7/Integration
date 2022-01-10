@@ -39,6 +39,11 @@ namespace Integration_Class_Library.PharmacyEntity.Services
             return pharmacyRepository.DeletePharmacy(id);
         }
 
+        public Pharmacy GetPharmacyByApiKey(string ApiKey)
+        {
+            return pharmacyRepository.GetPharmacyByApiKey(ApiKey);
+        }
+
         public bool DownloadMedicationSpecification(String fileName)
         {
             try

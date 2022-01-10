@@ -27,6 +27,12 @@ namespace Integration_API.Controllers
             return Ok("It works");
         }
 
+        [HttpGet]
+        public IActionResult GetAllTenders()
+        {
+            return Ok(_tenderingService.GetAllTenders());
+        }
+
         [HttpPost("addTender")]
         public IActionResult CreateTender([FromBody] Tender tender)
         {

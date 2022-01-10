@@ -84,6 +84,7 @@ namespace Integration_Class_Library.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Key = table.Column<string>(nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
@@ -102,12 +103,10 @@ namespace Integration_Class_Library.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     MedicineName = table.Column<string>(nullable: true),
-                    DosageInMilligrams = table.Column<int>(nullable: false),
-                    Manufacturer = table.Column<string>(nullable: true),
+                    MedicineDosage = table.Column<int>(nullable: false),
+                    AvailableQuantity = table.Column<int>(nullable: false),
                     MissingQuantity = table.Column<int>(nullable: false),
-                    PriceForSingleEntity = table.Column<double>(nullable: false),
-                    PriceForAllAvailableEntity = table.Column<double>(nullable: false),
-                    PriceForAllRequiredEntity = table.Column<double>(nullable: false)
+                    PriceForSingleEntity = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
