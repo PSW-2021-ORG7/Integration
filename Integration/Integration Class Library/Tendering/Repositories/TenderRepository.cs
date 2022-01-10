@@ -67,5 +67,21 @@ namespace Integration_Class_Library.Tendering.Repositories
             _context.SaveChanges();
             
         }
+
+        public bool SetWinner(Tender tender)
+        {
+            try
+            {
+                _context.Tenders.Attach(tender);
+                _context.Entry(tender).Property(x => x.IdWinnerPharmacy).IsModified = true;
+                _context.Entry(tender).Property(x => x.IsActive).IsModified = true;
+                _context.SaveChanges();
+                return true;
+            } catch (Exception e)
+            {
+                return false;
+            }
+            
+        }
     }
 }

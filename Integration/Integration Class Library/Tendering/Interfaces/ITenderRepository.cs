@@ -15,5 +15,6 @@ namespace Integration_Class_Library.Tendering.Interfaces
         TenderOffer GetTenderOfferByTenderId(int id);
         void CreateTenderOffer(TenderOffer offer);
         List<TenderOffer> GetAllTenderOffersByTenderId(int id);
+        bool SetWinner(Tender tender);
     }
 }
