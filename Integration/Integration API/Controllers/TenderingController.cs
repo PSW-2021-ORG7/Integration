@@ -87,6 +87,15 @@ namespace Integration_API.Controllers
  
         }
 
+        [HttpPut("closeTender/{idTender}")]
+        public IActionResult CloseTender(int idTender)
+        {
+            bool retVal = _tenderingService.CloseTender(idTender);
+            if (retVal) return Ok(retVal);
+            else return BadRequest();
+
+        }
+
 
     }
 }
