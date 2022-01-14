@@ -67,8 +67,8 @@ namespace IntegrationIntegrationTests
         }
 
         [Theory]
-        [InlineData("/api/tendering/8", "OK")]
-        [InlineData("/api/tendering/9", "OK")]
+        [InlineData("/api/tendering/1", "OK")]
+        [InlineData("/api/tendering/2", "OK")]
         [InlineData("/api/tendering/222", "NotFound")]
         public async Task Get_tender_by_id(string url, string expectedStatusCode)
         {

@@ -5,10 +5,6 @@ using Integration_Class_Library.Tendering.Interfaces;
 using Integration_Class_Library.Tendering.Models;
 using Integration_Class_Library.Tendering.Services;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using RabbitMQ.Client;
-using System;
-using System.Text;
 
 namespace Integration_API.Controllers
 {
@@ -78,7 +74,7 @@ namespace Integration_API.Controllers
         public IActionResult SendTenderRequest([FromBody] TenderRequest tenderRequest)
         {
             _tenderingService.sendRequestToPharmacy(tenderRequest);
-            return Ok();
+            return Ok(true);
         }
 
         [HttpPut("setWinner/{idTender}/{idWinner}")]
@@ -99,6 +95,12 @@ namespace Integration_API.Controllers
 
         }
 
+        [HttpPost("sendEmail/tender/{idTender}")]
+        public IActionResult SendEmail(int idTender)
+        {
+            if (_tenderingService.SendEmail(idTender)) return Ok();
+            else return BadRequest();
+        }
 
     }
 }
