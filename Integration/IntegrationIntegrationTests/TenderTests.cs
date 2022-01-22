@@ -47,6 +47,7 @@ namespace IntegrationIntegrationTests
 
         }
 
+        /*
         [Theory]
         [InlineData("/api/tendering/test", "OK")]
         [InlineData("/api/tendering", "OK")]
@@ -109,5 +110,6 @@ namespace IntegrationIntegrationTests
             Assert.Equal(expectedStatusCode, result.StatusCode.ToString()); ;
 
         }
+        */
     }
 }

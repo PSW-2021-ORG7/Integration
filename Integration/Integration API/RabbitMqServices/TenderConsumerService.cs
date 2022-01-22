@@ -1,4 +1,5 @@
-﻿using Integration_API.DTO;
+﻿using HospitalClassLibrary.Events.LogEvent;
+using Integration_API.DTO;
 using Integration_Class_Library.DAL;
 using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Repositories;

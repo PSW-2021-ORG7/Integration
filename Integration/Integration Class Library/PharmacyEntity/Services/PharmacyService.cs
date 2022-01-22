@@ -19,6 +19,11 @@ namespace Integration_Class_Library.PharmacyEntity.Services
             _logEventService = logEventService;
 
         }
+        public PharmacyService(IPharmacyRepository pharmacyRepository)
+        {
+            this.pharmacyRepository = pharmacyRepository;
+           
+        }
 
         public Pharmacy GetPharmacyById(int id)
         {
