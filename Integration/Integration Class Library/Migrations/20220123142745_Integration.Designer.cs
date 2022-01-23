@@ -4,13 +4,14 @@ using Integration_Class_Library.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration_Class_Library.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    [Migration("20220105140154_Events")]
-    partial class Events
+    [Migration("20220123142745_Integration")]
+    partial class Integration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -142,6 +143,96 @@ namespace Integration_Class_Library.Migrations
                     b.HasKey("IdFeedback");
 
                     b.ToTable("Response");
+                });
+
+            modelBuilder.Entity("Integration_Class_Library.Tendering.Models.TenderOffer", b =>
+                {
+                    b.Property<int>("IdTenderOffer")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("IdPharmacy")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdTender")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("PriceForAllAvailable")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("PriceForAllRequired")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("TotalNumberMissingMedicine")
+                        .HasColumnType("integer");
+
+                    b.HasKey("IdTenderOffer");
+
+                    b.ToTable("TenderOffers");
+                });
+
+            modelBuilder.Entity("Integration_Class_Library.Tendering.Tender", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("IdWinnerPharmacy")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("TenderKey")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tenders");
+                });
+
+            modelBuilder.Entity("Integration_Class_Library.Tendering.Models.TenderOffer", b =>
+                {
+                    b.OwnsMany("Integration_Class_Library.Tendering.Models.TenderOfferItem", "TenderOfferItems", b1 =>
+                        {
+                            b1.Property<int>("TenderOfferIdTenderOffer")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<int>("AvailableQuantity")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("MedicineDosage")
+                                .HasColumnType("integer");
+
+                            b1.Property<string>("MedicineName")
+                                .HasColumnType("text");
+
+                            b1.Property<int>("MissingQuantity")
+                                .HasColumnType("integer");
+
+                            b1.Property<double>("PriceForSingleEntity")
+                                .HasColumnType("double precision");
+
+                            b1.HasKey("TenderOfferIdTenderOffer", "Id");
+
+                            b1.ToTable("TenderOfferItem");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TenderOfferIdTenderOffer");
+                        });
                 });
 #pragma warning restore 612, 618
         }

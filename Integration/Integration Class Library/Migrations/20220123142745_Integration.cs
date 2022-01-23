@@ -4,10 +4,13 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Integration_Class_Library.Migrations
 {
-    public partial class TenderMigration : Migration
+    public partial class Integration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "Events");
+
             migrationBuilder.CreateTable(
                 name: "Pharmacy",
                 columns: table => new
@@ -96,6 +99,36 @@ namespace Integration_Class_Library.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FeedbackCreated",
+                schema: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    FeedbackId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FeedbackCreated", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PharmacyRegistered",
+                schema: "Events",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    IdPharmacy = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PharmacyRegistered", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TenderOfferItem",
                 columns: table => new
                 {
@@ -136,6 +169,14 @@ namespace Integration_Class_Library.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tenders");
+
+            migrationBuilder.DropTable(
+                name: "FeedbackCreated",
+                schema: "Events");
+
+            migrationBuilder.DropTable(
+                name: "PharmacyRegistered",
+                schema: "Events");
 
             migrationBuilder.DropTable(
                 name: "TenderOffers");

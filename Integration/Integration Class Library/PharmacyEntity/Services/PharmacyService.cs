@@ -38,7 +38,8 @@ namespace Integration_Class_Library.PharmacyEntity.Services
         public Pharmacy PostPharmacy(Pharmacy pharmacy)
         {
             Pharmacy created = pharmacyRepository.CreatePharmacy(pharmacy);
-            _logEventService.LogEvent(new PharmacyRegisteredEventParams(created.IdPharmacy));
+            if(created != null) _logEventService.LogEvent(new PharmacyRegisteredEventParams(created.IdPharmacy));
+
             return created;
         }
 

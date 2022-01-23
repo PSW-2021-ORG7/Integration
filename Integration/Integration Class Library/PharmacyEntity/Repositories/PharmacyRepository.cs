@@ -21,9 +21,14 @@ namespace Integration_Class_Library.PharmacyEntity.Repositories
 
         public Pharmacy CreatePharmacy(Pharmacy pharmacy)
         {
-            _context.Add(pharmacy);
-            _context.SaveChanges();
-            return pharmacy;
+            if (_context.Pharmacies.Any(m => m.ApiKeyPharmacy.Equals(pharmacy.ApiKeyPharmacy))) return null;
+            else
+            {
+                _context.Add(pharmacy);
+                _context.SaveChanges();
+                return pharmacy;
+            }
+           
         }
 
         public List<Pharmacy> GetAllPharmacies()

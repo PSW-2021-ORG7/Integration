@@ -47,7 +47,10 @@ namespace Integration_API.Controllers
         public IActionResult PostPharmacy([FromBody] NewPharmacyDTO pharmacyDTO)
         {
             Pharmacy pharmacy = _mapper.Map<Pharmacy>(pharmacyDTO);
-            return Ok(pharmacyService.PostPharmacy(pharmacy));
+            Pharmacy created = pharmacyService.PostPharmacy(pharmacy);
+
+            if (created != null) return Ok(true);
+            else return BadRequest();
         }
 
         // PUT: api/pharmacies/id
