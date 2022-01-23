@@ -1,5 +1,5 @@
 ﻿using HospitalClassLibrary.Events.LogEvent;
-using Integration_Class_Library.PharmacyEntity.DAL;
+using Integration_Class_Library.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -6,8 +6,9 @@ using System.Linq;
 using System.IO;
 using Newtonsoft.Json;
 using Renci.SshNet;
+using Integration_Class_Library.DAL;
 
-namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
+namespace Integration_Class_Library.PharmacyEntity.Repositories
 {
     public class PrescriptionRepository : IPrescriptionRepository
     {

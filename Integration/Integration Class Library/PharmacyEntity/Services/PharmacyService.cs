@@ -19,6 +19,11 @@ namespace Integration_Class_Library.PharmacyEntity.Services
             _logEventService = logEventService;
 
         }
+        public PharmacyService(IPharmacyRepository pharmacyRepository)
+        {
+            this.pharmacyRepository = pharmacyRepository;
+           
+        }
 
         public Pharmacy GetPharmacyById(int id)
         {
@@ -46,6 +51,11 @@ namespace Integration_Class_Library.PharmacyEntity.Services
         public bool DeletePharmacy(int id)
         {
             return pharmacyRepository.DeletePharmacy(id);
+        }
+
+        public Pharmacy GetPharmacyByApiKey(string ApiKey)
+        {
+            return pharmacyRepository.GetPharmacyByApiKey(ApiKey);
         }
 
         public bool DownloadMedicationSpecification(String fileName)

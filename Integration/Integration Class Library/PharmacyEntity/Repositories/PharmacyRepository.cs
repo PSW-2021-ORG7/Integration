@@ -1,4 +1,5 @@
-﻿using Integration_Class_Library.Models;
+﻿using Integration_Class_Library.DAL;
+using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Renci.SshNet;
@@ -7,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
+namespace Integration_Class_Library.PharmacyEntity.Repositories
 {
     public class PharmacyRepository : IPharmacyRepository
     {
@@ -33,6 +34,11 @@ namespace Integration_Class_Library.PharmacyEntity.DAL.Repositories
         public Pharmacy GetPharmacyById(int id)
         {
             return _context.Pharmacies.Find(id);
+        }
+
+        public Pharmacy GetPharmacyByApiKey(string ApiKey)
+        {
+            return _context.Pharmacies.SingleOrDefault(m => m.ApiKeyPharmacy.Equals(ApiKey));
         }
 
         public bool PutPharmacy(int id, Pharmacy pharmacy)
