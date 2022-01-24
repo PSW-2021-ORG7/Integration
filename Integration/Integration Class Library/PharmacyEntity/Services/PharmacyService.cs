@@ -67,7 +67,7 @@ namespace Integration_Class_Library.PharmacyEntity.Services
             }
             catch (Exception e)
             {
-                throw (e);
+                return false;
             }
             
         }

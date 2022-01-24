@@ -71,7 +71,14 @@ namespace Integration_API.Controllers
         [HttpGet("downloadSpec/{fileName}")]
         public IActionResult DownloadMedicationSpecification(String fileName)
         {
-            return Ok(pharmacyService.DownloadMedicationSpecification(fileName));
+            if (pharmacyService.DownloadMedicationSpecification(fileName))
+            {
+                return Ok(true);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
     }
