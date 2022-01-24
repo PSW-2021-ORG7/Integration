@@ -2,7 +2,6 @@
 using Integration_Class_Library.Events.PharmacyRegisteredEvent;
 using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 

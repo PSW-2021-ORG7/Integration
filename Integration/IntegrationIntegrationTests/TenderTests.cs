@@ -13,6 +13,7 @@ namespace IntegrationIntegrationTests
     public class TenderTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
 
         public TenderTests(WebApplicationFactory<Startup> factory)
         {

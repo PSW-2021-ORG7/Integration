@@ -12,7 +12,7 @@ namespace IntegrationIntegrationTests
     public class PrescriptionTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
-
+        
         public PrescriptionTests(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
@@ -45,7 +45,7 @@ namespace IntegrationIntegrationTests
             return byteContent;
 
         }
-
+/*
         [Theory]
         [InlineData("/api/prescription/test", "OK")]
         [InlineData("/api/prescription", "OK")]
@@ -68,7 +68,7 @@ namespace IntegrationIntegrationTests
         [InlineData("/api/prescription/222", "NotFound")]
         public async Task Get_prescription_by_id(string url, string expectedStatusCode)
         {
-
+           
             //Arrange
             var client = createClient();
 
@@ -76,10 +76,9 @@ namespace IntegrationIntegrationTests
             var response = await client.GetAsync(url);
 
             //Assert
-            //response.EnsureSuccessStatusCode();
             Assert.Equal(expectedStatusCode, response.StatusCode.ToString());
 
         }
-
+*/
     }
 }

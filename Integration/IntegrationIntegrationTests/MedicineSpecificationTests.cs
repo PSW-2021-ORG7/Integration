@@ -12,7 +12,7 @@ namespace IntegrationIntegrationTests
     public class MedicineSpecificationTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
-        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") == null;
 
         public MedicineSpecificationTests(WebApplicationFactory<Startup> factory)
         {
