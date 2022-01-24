@@ -1,11 +1,13 @@
-﻿using HospitalClassLibrary.Events.LogEvent;
+﻿using AutoMapper;
+using HospitalClassLibrary.Events.LogEvent;
 using Integration_API.Filters;
 using Integration_Class_Library.Events.FeedbackCreatedEvent;
 using Integration_Class_Library.PharmacyEntity.Interfaces;
 using Integration_Class_Library.PharmacyEntity.Models;
+using Integration_Class_Library.PharmacyEntity.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace Integration_API.Controllers
 {
@@ -14,57 +16,49 @@ namespace Integration_API.Controllers
     [ApiKeyAuth]
     public class FeedbackController : Controller
     {
-        private readonly IFeedbackRepository _feedback;
-        private readonly ILogEventService<FeedbackCreatedEventParams> _logEventService;
-        public FeedbackController(IFeedbackRepository feedback, ILogEventService<FeedbackCreatedEventParams> logEventService)
+        private FeedbackService _feedbackService;
+        private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
+        public FeedbackController(IFeedbackRepository feedbackRepository, IConfiguration configuration, ILogEventService<FeedbackCreatedEventParams> logEventService, IMapper mapper)
         {
-            _logEventService = logEventService;
-            _feedback = feedback;
+            this._configuration = configuration;
+            _feedbackService = new FeedbackService(feedbackRepository, logEventService);
+            _mapper = mapper;
         }
 
-        // GET: api/feedback
         [HttpGet]
-        public async Task<ActionResult<Feedback>> GetAllFeedback()
+        public IActionResult GetAllFeedback()
         {
-            return Ok(await _feedback.GetAllFeedback());
+            return Ok(_feedbackService.GetAllFeedback());
         }
 
-        // GET: api/feedback/id
         [HttpGet("{id}")]
-        public async Task<ActionResult<Feedback>> GetFeedbackById(int id)
+        public IActionResult GetFeedbackById(int id)
         {
-            return Ok(await _feedback.GetFeedbackById(id));
+            return Ok(_feedbackService.GetFeedbackById(id));
         }
 
-        //GET:
         [HttpGet("find/{idPharmacy}")]
-        public async Task<ActionResult<Feedback>> GetFeedbackByPharmacyId(int idPharmacy)
+        public IActionResult GetFeedbackByPharmacyId(int idPharmacy)
         {
-            return Ok(await _feedback.GetFeedbackByPharmacyId(idPharmacy));
+            List<Feedback> feedback = _feedbackService.GetAllFeedbackByPharmacyId(idPharmacy);
+            if (feedback.Count > 0) return Ok(feedback);
+            else return NotFound();
         }
 
-        //public async Task<List<Feedback>> GetFeedbackByPharmacyId(string idPharmacy)
-        // POST: api/feedback
         [HttpPost]
-        public async Task<ActionResult<Feedback>> PostFeedback([FromBody] Feedback feedback)
+        public IActionResult PostFeedback([FromBody] Feedback feedbackD)
         {
-            Feedback updated = await _feedback.CreateFeedback(feedback);
-            _logEventService.LogEvent(new FeedbackCreatedEventParams(updated.IdFeedback));
-            return Ok(updated);
+            Feedback feedback = _mapper.Map<Feedback>(feedbackD);
+            return Ok(_feedbackService.PostFeedback(feedback));
+
         }
 
-        // PUT: api/feedback/id
         [HttpPut("{id}")]
-        public async Task<int> PutFeedback(int id, Feedback feedback)
+        public IActionResult PutFeedback(int id, Feedback feedback)
         {
-            return (await _feedback.PutFeedback(id, feedback));
-        }
+            return Ok(_feedbackService.PutFeedback(id, feedback));
 
-        // DELETE: api/feedback/id
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Feedback>> DeleteFeedback(int id)
-        {
-            return (await _feedback.DeleteFeedback(id));
         }
     }
 }
