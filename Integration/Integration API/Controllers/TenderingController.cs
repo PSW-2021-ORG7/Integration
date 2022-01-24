@@ -73,8 +73,9 @@ namespace Integration_API.Controllers
         [HttpPost("sendRequest")]
         public IActionResult SendTenderRequest([FromBody] TenderRequest tenderRequest)
         {
-            _tenderingService.sendRequestToPharmacy(tenderRequest);
-            return Ok(true);
+            bool retVal = _tenderingService.sendRequestToPharmacy(tenderRequest);
+            if (retVal) return Ok(retVal);
+            else return BadRequest();
         }
 
         [HttpPut("setWinner/{idTender}/{idWinner}")]
