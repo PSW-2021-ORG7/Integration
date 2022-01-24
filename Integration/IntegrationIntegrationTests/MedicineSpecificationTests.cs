@@ -1,4 +1,4 @@
-using Integration_API;
+﻿using Integration_API;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using System;
@@ -9,11 +9,12 @@ using Xunit;
 
 namespace IntegrationIntegrationTests
 {
-    public class PrescriptionTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class MedicineSpecificationTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
-        
-        public PrescriptionTests(WebApplicationFactory<Startup> factory)
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") == null;
+
+        public MedicineSpecificationTests(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
@@ -43,42 +44,23 @@ namespace IntegrationIntegrationTests
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
             return byteContent;
-
         }
-/*
-        [Theory]
-        [InlineData("/api/prescription/test", "OK")]
-        [InlineData("/api/prescription", "OK")]
-        public async Task Get_http_request(string url, string expectedStatusCode)
+
+        [SkippableTheory]
+        [InlineData("/api/pharmacy/downloadSpec/Ibuprofen_400.pdf", "OK")]
+        [InlineData("/api/pharmacy/downloadSpec/Brufen_600.pdf", "OK")]
+        [InlineData("/api/pharmacy/downloadSpec/Bisoprolol_300.pdf", "NotFound")]
+        [InlineData("/api/pharmacy/downloadSpec/Aspirin_100.pdf", "NotFound")]
+        public async Task Download_specification(string url, string expectedStatusCode)
         {
-            //Arrange
+            Skip.If(skippable);
+
             var client = createClient();
 
-            //Act
             var response = await client.GetAsync(url);
 
-            //Assert
-            response.EnsureSuccessStatusCode();
             Assert.Equal(expectedStatusCode, response.StatusCode.ToString());
         }
 
-        [Theory]
-        [InlineData("/api/prescription/1", "OK")]
-        [InlineData("/api/prescription/2", "OK")]
-        [InlineData("/api/prescription/222", "NotFound")]
-        public async Task Get_prescription_by_id(string url, string expectedStatusCode)
-        {
-           
-            //Arrange
-            var client = createClient();
-
-            //Act
-            var response = await client.GetAsync(url);
-
-            //Assert
-            Assert.Equal(expectedStatusCode, response.StatusCode.ToString());
-
-        }
-*/
     }
 }

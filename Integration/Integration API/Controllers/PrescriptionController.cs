@@ -64,7 +64,6 @@ namespace Integration_API.Controllers
         // TO DO: Create document on the side of hospital
         private PdfDocument createDocument(Prescription prescription)
         {          
-            //Medicine medicine = _medicineService.GetByID(prescription.MedicineId);
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             PdfDocument document = new PdfDocument();
             document.Info.Title = prescription.PatientJMBG;
@@ -105,11 +104,6 @@ namespace Integration_API.Controllers
                     XStringFormats.CenterRight);
 
             gfx.DrawString("Medicine ", font, XBrushes.Goldenrod, 5.0, 160.0);
-            /*
-            gfx.DrawString(medicine.Name + " " + medicine.DosageInMilligrams + "mg", font, XBrushes.Black,
-                    new XRect(500.0, 155.0, 0.0, 0.0),
-                    XStringFormats.CenterRight);
-            */
 
             return document;
            

@@ -90,20 +90,28 @@ namespace Integration_Class_Library.PharmacyEntity.Repositories
 
         public bool DownloadMedicationSpecification(String fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.1.3", "tester", "password")))
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "tester", "password")))
             {
                 client.Connect();
 
                 string sourceFileServer = @"\public\" + fileName;
                 string sourceFileLocal = Path.Combine(Environment.CurrentDirectory, @"Downloads\", fileName);
 
-
-                using (Stream stream = File.OpenWrite(sourceFileLocal))
+                try
                 {
-                    client.DownloadFile(sourceFileServer, stream);
+                    using (Stream stream = File.OpenWrite(sourceFileLocal))
+                    {
+                        client.DownloadFile(sourceFileServer, stream);
+                    }
+
+                    client.Disconnect();
+
+                }
+                catch (Exception e)
+                {
+                    throw (e);
                 }
 
-                client.Disconnect();
             }
             return true;
         }
