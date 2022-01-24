@@ -30,32 +30,39 @@ namespace Integration_API.RabbitMQServices
         private PharmacyService _pharmacyService = new PharmacyService(new PharmacyRepository(new IntegrationDbContext()));
         public override Task StartAsync(CancellationToken stoppingToken)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            connection = factory.CreateConnection();
-            channel = connection.CreateModel();
-            channel.QueueDeclare(queue: "tendering-offers-queue",
-                                    durable: false,
-                                    exclusive: false,
-                                    autoDelete: false,
-                                    arguments: null);
-
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
+            try
             {
-                byte[] body = ea.Body.ToArray();
-                var jsonBody = Encoding.UTF8.GetString(body);
-                TenderOfferDTO offer = new TenderOfferDTO();
-                
-                offer = JsonConvert.DeserializeObject<TenderOfferDTO>(jsonBody);
-                TenderOffer finalOffer = CreateOffer(offer);
-                _tenderService.AddTenderOffer(finalOffer);
-                
+                var factory = new ConnectionFactory() { HostName = "localhost" };
+                connection = factory.CreateConnection();
+                channel = connection.CreateModel();
+                channel.QueueDeclare(queue: "tendering-offers-queue",
+                                        durable: false,
+                                        exclusive: false,
+                                        autoDelete: false,
+                                        arguments: null);
 
-            };
-            channel.BasicConsume(queue: "tendering-offers-queue",
-                                    autoAck: true,
-                                    consumer: consumer);
-            return base.StartAsync(cancellationToken);
+                var consumer = new EventingBasicConsumer(channel);
+                consumer.Received += (model, ea) =>
+                {
+                    byte[] body = ea.Body.ToArray();
+                    var jsonBody = Encoding.UTF8.GetString(body);
+                    TenderOfferDTO offer = new TenderOfferDTO();
+
+                    offer = JsonConvert.DeserializeObject<TenderOfferDTO>(jsonBody);
+                    TenderOffer finalOffer = CreateOffer(offer);
+                    _tenderService.AddTenderOffer(finalOffer);
+
+
+                };
+                channel.BasicConsume(queue: "tendering-offers-queue",
+                                        autoAck: true,
+                                        consumer: consumer);
+                return base.StartAsync(cancellationToken);
+            } catch (Exception e)
+            {
+                return base.StartAsync(cancellationToken);
+            }
+            
         }
 
         public override Task StopAsync(CancellationToken cancellationToken)

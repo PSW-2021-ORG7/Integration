@@ -8,11 +8,11 @@ namespace Integration_Class_Library.PharmacyEntity.Interfaces
 {
     public interface IFeedbackRepository
     {
-        Task<Feedback> CreateFeedback(Feedback feedback);
-        Task<List<Feedback>> GetAllFeedback();
-        Task<Feedback> GetFeedbackById(int id);
-        Task<int> PutFeedback(int id, Feedback feedback);
-        Task<ActionResult<Feedback>> DeleteFeedback(int id);
-        Task<List<Feedback>> GetFeedbackByPharmacyId(int idPharmacy);
+        Feedback CreateFeedback(Feedback feedback);
+        List<Feedback> GetAllFeedback();
+        Feedback GetFeedbackById(int id);
+        bool PutFeedback(int id, Feedback feedback);
+        bool DeleteFeedback(int id);
+        List<Feedback> GetAllFeedbackByPharmacyId(int idPharmacy);
     }
 }

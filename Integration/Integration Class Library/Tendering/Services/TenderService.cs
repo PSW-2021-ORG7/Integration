@@ -10,6 +10,7 @@ using Integration_Class_Library.Models;
 using Integration_Class_Library.PharmacyEntity.Services;
 using Integration_Class_Library.PharmacyEntity.Repositories;
 using Integration_Class_Library.DAL;
+using System;
 
 namespace Integration_Class_Library.Tendering.Services
 {
@@ -171,26 +172,35 @@ namespace Integration_Class_Library.Tendering.Services
             client.Send(mailMessage);
         }
 
-        public void sendRequestToPharmacy(TenderRequest tenderRequest)
+        public bool sendRequestToPharmacy(TenderRequest tenderRequest)
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
+            try
             {
-                channel.QueueDeclare(queue: "tendering-requests-queue",
-                                     durable: false,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
+                var factory = new ConnectionFactory() { HostName = "localhost" };
+                using (var connection = factory.CreateConnection())
+                using (var channel = connection.CreateModel())
+                {
+                    channel.QueueDeclare(queue: "tendering-requests-queue",
+                                         durable: false,
+                                         exclusive: false,
+                                         autoDelete: false,
+                                         arguments: null);
 
-                TenderRequest tenderRequestToSend = tenderRequest;
-                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tenderRequestToSend));
+                    TenderRequest tenderRequestToSend = tenderRequest;
+                    var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tenderRequestToSend));
 
-                channel.BasicPublish(exchange: "",
-                                     routingKey: "tendering-requests-queue",
-                                     basicProperties: null,
-                                     body: body);
+                    channel.BasicPublish(exchange: "",
+                                         routingKey: "tendering-requests-queue",
+                                         basicProperties: null,
+                                         body: body);
+                    return true;
+                }
+
+            } catch (Exception e)
+            {
+                return false;
             }
+            
         }
     }
 }

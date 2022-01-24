@@ -57,7 +57,7 @@ namespace Integration_API.Controllers
             }
             catch (Exception e)
             {
-                throw (e);
+                return BadRequest();
             }
         }
 
